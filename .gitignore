@@ -1,0 +1,42 @@
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspacedata
+xcuserdata/
+DerivedData/
+*.moved-aside
+*.xcuserstate
+*.xccheckout
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods (unused, but ignore if introduced later)
+Pods/
+
+# Secrets — never commit
+GoogleService-Info.plist
+**/GoogleService-Info.plist
+.env
+.env.*
+*.pem
+*.key
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+*.local
+
+# Node / Cloud Functions
+node_modules/
+firebase/functions/lib/
+npm-debug.log*
+
+# macOS
+.DS_Store

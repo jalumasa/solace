@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CBED7E9DC6679620858B242 /* ResourceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9488EFF3F4611ACA371F8D3 /* ResourceListView.swift */; };
+		2386894875D74549997232E3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 42960322F08012FB206FF3BE /* FirebaseAuth */; };
+		2C5F41597C3B7663DFE50DF0 /* SolaceCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7BF77AFDE58F039D82DAE84A /* SolaceCore */; };
+		30F0B56750EA6ADD18675788 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */; };
+		33F4E2DBD5856CD86E410D3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE8957C9F2FEB42F1A76A007 /* GoogleService-Info.plist */; };
+		3871DEE5B59642B44C76374E /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979399AD6FEF61BB1E1B9742 /* RootTabView.swift */; };
+		39E06395DB9E28248B6EE8DD /* CrisisResourceBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99343A0E67F464ACB9FB432F /* CrisisResourceBanner.swift */; };
+		4DA8A24EE639C84E9376F429 /* FirestoreMessagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BBE82373222DD94C86607 /* FirestoreMessagingService.swift */; };
+		5F9F57F5895F5E27368065DB /* SolaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6D9C3B940A9BBF1333720 /* SolaceApp.swift */; };
+		6178D35970EEE92E25856E36 /* CounselorDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48B6A92266DFEF385FF93E1 /* CounselorDirectoryView.swift */; };
+		6E2C3B763DCBED1F8A5D889E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DBAFF077D642DE75A5B35E66 /* FirebaseFirestore */; };
+		6E5CC8E43333F401D5EFC737 /* BreathingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698D095E9839297FE0772B8 /* BreathingSessionView.swift */; };
+		825453E0F9C6B9772C1A311C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 37698DB6E2E466F430B58E98 /* FirebaseCore */; };
+		8B9CFD5AE6EFB94BD7113F80 /* AuthRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29A44DD5148379D8F5B98D /* AuthRootView.swift */; };
+		99EAE74B6FF2B8199BFFBAFD /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 1FC59B2C5782542582D3D48D /* FirebaseFunctions */; };
+		A586460F7DE0145D2F680955 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7E2DC8DF98990709E0A06 /* ChatView.swift */; };
+		B00073D0E2DD1469F8011CA1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E147A01B77010B152B8A80 /* ProfileView.swift */; };
+		B97F4F64EE31C3FA160815FA /* ResourceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19BAA99A17D884EBC04417F /* ResourceDetailView.swift */; };
+		BD8B3C5B05356816754053A9 /* GroundingScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3672F4A6E70E9E6BAFE4CCA0 /* GroundingScriptView.swift */; };
+		BE15971708CAB001003EF205 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1E031B92D0C8E6A90D837 /* SignUpView.swift */; };
+		BE785E00D0EE9739E7D27E18 /* CloudFunctionAIChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12DC2AB9036E7BA77F2B0B4 /* CloudFunctionAIChatService.swift */; };
+		C80DCC9E9E4A77AF7532C9F0 /* FirestoreResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6070D05918BB83671B9BB /* FirestoreResourceService.swift */; };
+		E1193A908F2B2543A73C52E0 /* AIChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44051516D1E4D08277FCBAD8 /* AIChatView.swift */; };
+		E68EE097F42E6C1B84D43F66 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA5724012448A9B3EAC0EE /* SignInView.swift */; };
+		E68F44F3DD91B8BCE0E74B29 /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0A3C80072DAFC768B77230 /* ConversationListView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		21B1E031B92D0C8E6A90D837 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		3672F4A6E70E9E6BAFE4CCA0 /* GroundingScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundingScriptView.swift; sourceTree = "<group>"; };
+		43E6070D05918BB83671B9BB /* FirestoreResourceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreResourceService.swift; sourceTree = "<group>"; };
+		44051516D1E4D08277FCBAD8 /* AIChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatView.swift; sourceTree = "<group>"; };
+		45BA5724012448A9B3EAC0EE /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		74E147A01B77010B152B8A80 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		81B6D9C3B940A9BBF1333720 /* SolaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolaceApp.swift; sourceTree = "<group>"; };
+		9698D095E9839297FE0772B8 /* BreathingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingSessionView.swift; sourceTree = "<group>"; };
+		979399AD6FEF61BB1E1B9742 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		99343A0E67F464ACB9FB432F /* CrisisResourceBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrisisResourceBanner.swift; sourceTree = "<group>"; };
+		B3D13A31551DB4B5B0658D39 /* Solace.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Solace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B97BBE82373222DD94C86607 /* FirestoreMessagingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMessagingService.swift; sourceTree = "<group>"; };
+		BE8957C9F2FEB42F1A76A007 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C12DC2AB9036E7BA77F2B0B4 /* CloudFunctionAIChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAIChatService.swift; sourceTree = "<group>"; };
+		D8F87601D2730B4017414BFE /* SolaceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SolaceCore; path = SolaceCore; sourceTree = SOURCE_ROOT; };
+		DBB7E2DC8DF98990709E0A06 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		E19BAA99A17D884EBC04417F /* ResourceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceDetailView.swift; sourceTree = "<group>"; };
+		E48B6A92266DFEF385FF93E1 /* CounselorDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDirectoryView.swift; sourceTree = "<group>"; };
+		E9488EFF3F4611ACA371F8D3 /* ResourceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceListView.swift; sourceTree = "<group>"; };
+		FA29A44DD5148379D8F5B98D /* AuthRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootView.swift; sourceTree = "<group>"; };
+		FD0A3C80072DAFC768B77230 /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7CE331067F64D8B52B27C8EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C5F41597C3B7663DFE50DF0 /* SolaceCore in Frameworks */,
+				2386894875D74549997232E3 /* FirebaseAuth in Frameworks */,
+				6E2C3B763DCBED1F8A5D889E /* FirebaseFirestore in Frameworks */,
+				99EAE74B6FF2B8199BFFBAFD /* FirebaseFunctions in Frameworks */,
+				825453E0F9C6B9772C1A311C /* FirebaseCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A4DB401C603BE8715909EE9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				979399AD6FEF61BB1E1B9742 /* RootTabView.swift */,
+				AD9486833712AB40A6327C2E /* AIChat */,
+				A4D93369237541A4FBD0E28D /* Auth */,
+				1CB17D1AC23C857992C3FE0D /* Library */,
+				3089C5457A964A3D5CC842B4 /* Messaging */,
+				0BB9DE6961F0181B3F2A7523 /* Profile */,
+				B02BAEC6AD6BED8638E0866A /* Relaxation */,
+				2DF2F00A9C7DDC4F480CD16A /* Shared */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0BB9DE6961F0181B3F2A7523 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				74E147A01B77010B152B8A80 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		1CB17D1AC23C857992C3FE0D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				E19BAA99A17D884EBC04417F /* ResourceDetailView.swift */,
+				E9488EFF3F4611ACA371F8D3 /* ResourceListView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		2DF2F00A9C7DDC4F480CD16A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				99343A0E67F464ACB9FB432F /* CrisisResourceBanner.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		3089C5457A964A3D5CC842B4 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7E2DC8DF98990709E0A06 /* ChatView.swift */,
+				FD0A3C80072DAFC768B77230 /* ConversationListView.swift */,
+				E48B6A92266DFEF385FF93E1 /* CounselorDirectoryView.swift */,
+			);
+			path = Messaging;
+			sourceTree = "<group>";
+		};
+		4EE7D051B47A0632C08ED735 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE8957C9F2FEB42F1A76A007 /* GoogleService-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		54C40B57B0551B63B587D10B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C12DC2AB9036E7BA77F2B0B4 /* CloudFunctionAIChatService.swift */,
+				1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */,
+				B97BBE82373222DD94C86607 /* FirestoreMessagingService.swift */,
+				43E6070D05918BB83671B9BB /* FirestoreResourceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8827A92F23EA0BD3E918DA8F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3D13A31551DB4B5B0658D39 /* Solace.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96FB9A4CF3086518954C895C /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D8F87601D2730B4017414BFE /* SolaceCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		A4D93369237541A4FBD0E28D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FA29A44DD5148379D8F5B98D /* AuthRootView.swift */,
+				45BA5724012448A9B3EAC0EE /* SignInView.swift */,
+				21B1E031B92D0C8E6A90D837 /* SignUpView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		AD9486833712AB40A6327C2E /* AIChat */ = {
+			isa = PBXGroup;
+			children = (
+				44051516D1E4D08277FCBAD8 /* AIChatView.swift */,
+			);
+			path = AIChat;
+			sourceTree = "<group>";
+		};
+		B02BAEC6AD6BED8638E0866A /* Relaxation */ = {
+			isa = PBXGroup;
+			children = (
+				9698D095E9839297FE0772B8 /* BreathingSessionView.swift */,
+				3672F4A6E70E9E6BAFE4CCA0 /* GroundingScriptView.swift */,
+			);
+			path = Relaxation;
+			sourceTree = "<group>";
+		};
+		BA3C971EE76B1982A07399A9 = {
+			isa = PBXGroup;
+			children = (
+				96FB9A4CF3086518954C895C /* Packages */,
+				EA71AC65D49480800ECE66BD /* SolaceApp */,
+				8827A92F23EA0BD3E918DA8F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C8ADBE4D0F2DAA595023DF87 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				81B6D9C3B940A9BBF1333720 /* SolaceApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EA71AC65D49480800ECE66BD /* SolaceApp */ = {
+			isa = PBXGroup;
+			children = (
+				C8ADBE4D0F2DAA595023DF87 /* App */,
+				4EE7D051B47A0632C08ED735 /* Resources */,
+				54C40B57B0551B63B587D10B /* Services */,
+				0A4DB401C603BE8715909EE9 /* Views */,
+			);
+			path = SolaceApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CC03DDE1D5BE5012E21FCB42 /* Solace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9D932200D45969B59CA9085 /* Build configuration list for PBXNativeTarget "Solace" */;
+			buildPhases = (
+				E17049164A1C5A9253957E1D /* Sources */,
+				E7A8FFB152023CEB3EA6B82A /* Resources */,
+				7CE331067F64D8B52B27C8EF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Solace;
+			packageProductDependencies = (
+				7BF77AFDE58F039D82DAE84A /* SolaceCore */,
+				42960322F08012FB206FF3BE /* FirebaseAuth */,
+				DBAFF077D642DE75A5B35E66 /* FirebaseFirestore */,
+				1FC59B2C5782542582D3D48D /* FirebaseFunctions */,
+				37698DB6E2E466F430B58E98 /* FirebaseCore */,
+			);
+			productName = Solace;
+			productReference = B3D13A31551DB4B5B0658D39 /* Solace.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F11FD22409C87A6C7F09BA3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 24D53917A2F75A0326B25114 /* Build configuration list for PBXProject "Solace" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = BA3C971EE76B1982A07399A9;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7FB89746896CD22F5D6B3762 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C5CC50E7640331F023E7188D /* XCLocalSwiftPackageReference "SolaceCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8827A92F23EA0BD3E918DA8F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CC03DDE1D5BE5012E21FCB42 /* Solace */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7A8FFB152023CEB3EA6B82A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33F4E2DBD5856CD86E410D3D /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E17049164A1C5A9253957E1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1193A908F2B2543A73C52E0 /* AIChatView.swift in Sources */,
+				8B9CFD5AE6EFB94BD7113F80 /* AuthRootView.swift in Sources */,
+				6E5CC8E43333F401D5EFC737 /* BreathingSessionView.swift in Sources */,
+				A586460F7DE0145D2F680955 /* ChatView.swift in Sources */,
+				BE785E00D0EE9739E7D27E18 /* CloudFunctionAIChatService.swift in Sources */,
+				E68F44F3DD91B8BCE0E74B29 /* ConversationListView.swift in Sources */,
+				6178D35970EEE92E25856E36 /* CounselorDirectoryView.swift in Sources */,
+				39E06395DB9E28248B6EE8DD /* CrisisResourceBanner.swift in Sources */,
+				30F0B56750EA6ADD18675788 /* FirebaseAuthService.swift in Sources */,
+				4DA8A24EE639C84E9376F429 /* FirestoreMessagingService.swift in Sources */,
+				C80DCC9E9E4A77AF7532C9F0 /* FirestoreResourceService.swift in Sources */,
+				BD8B3C5B05356816754053A9 /* GroundingScriptView.swift in Sources */,
+				B00073D0E2DD1469F8011CA1 /* ProfileView.swift in Sources */,
+				B97F4F64EE31C3FA160815FA /* ResourceDetailView.swift in Sources */,
+				0CBED7E9DC6679620858B242 /* ResourceListView.swift in Sources */,
+				3871DEE5B59642B44C76374E /* RootTabView.swift in Sources */,
+				E68EE097F42E6C1B84D43F66 /* SignInView.swift in Sources */,
+				BE15971708CAB001003EF205 /* SignUpView.swift in Sources */,
+				5F9F57F5895F5E27368065DB /* SolaceApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		30F6E8114D949588DB2760D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		75C2DACE6D00CA43AA9073D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C2AFA424208968AD347AE5E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanalumasa.Solace;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		CFEFE7BA7ABFD5CE6416A731 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanalumasa.Solace;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		24D53917A2F75A0326B25114 /* Build configuration list for PBXProject "Solace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75C2DACE6D00CA43AA9073D5 /* Debug */,
+				30F6E8114D949588DB2760D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E9D932200D45969B59CA9085 /* Build configuration list for PBXNativeTarget "Solace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFEFE7BA7ABFD5CE6416A731 /* Debug */,
+				C2AFA424208968AD347AE5E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		C5CC50E7640331F023E7188D /* XCLocalSwiftPackageReference "SolaceCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = SolaceCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7FB89746896CD22F5D6B3762 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1FC59B2C5782542582D3D48D /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FB89746896CD22F5D6B3762 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		37698DB6E2E466F430B58E98 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FB89746896CD22F5D6B3762 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		42960322F08012FB206FF3BE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FB89746896CD22F5D6B3762 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		7BF77AFDE58F039D82DAE84A /* SolaceCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SolaceCore;
+		};
+		DBAFF077D642DE75A5B35E66 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FB89746896CD22F5D6B3762 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 6F11FD22409C87A6C7F09BA3 /* Project object */;
+}

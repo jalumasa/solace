@@ -1,0 +1,72 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /users/{userId} {
+      // Everyone can read their own profile. Counselor profiles are also
+      // readable by any signed-in user so students can browse a directory —
+      // student profiles stay private to their owner.
+      allow read: if isOwner(userId) || (isSignedIn() && resource.data.role == 'counselor');
+
+      allow create: if isOwner(userId)
+        && request.resource.data.role in ['student', 'counselor']
+        && request.resource.data.email is string
+        && request.resource.data.displayName is string;
+
+      allow update: if isOwner(userId)
+        && request.resource.data.role == resource.data.role; // role is immutable after signup
+
+      allow delete: if false;
+    }
+
+    match /conversations/{conversationId} {
+      function isParticipant() {
+        return isSignedIn() && request.auth.uid in resource.data.participantIDs;
+      }
+
+      allow read: if isParticipant();
+
+      allow create: if isSignedIn()
+        && request.auth.uid in request.resource.data.participantIDs
+        && request.resource.data.participantIDs.size() == 2;
+
+      allow update: if isParticipant()
+        // Only last-message metadata may change after creation.
+        && request.resource.data.studentID == resource.data.studentID
+        && request.resource.data.counselorID == resource.data.counselorID
+        && request.resource.data.participantIDs == resource.data.participantIDs;
+
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        function isConversationParticipant() {
+          return isSignedIn()
+            && request.auth.uid in
+              get(/databases/$(database)/documents/conversations/$(conversationId)).data.participantIDs;
+        }
+
+        allow read: if isConversationParticipant();
+
+        allow create: if isConversationParticipant()
+          && request.resource.data.senderID == request.auth.uid;
+
+        allow update, delete: if false;
+      }
+    }
+
+    match /resources/{resourceId} {
+      // Curated content is public-read; only seeded via the console/Admin SDK.
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+  }
+}
