@@ -6,7 +6,9 @@ import SolaceCore
 /// documents store both participant IDs (for querying) and their display
 /// names (denormalized at creation time) so the conversation list doesn't
 /// need a separate lookup per row.
-final class FirestoreMessagingService: MessagingServicing {
+// Firestore's SDK type is documented as thread-safe but doesn't yet carry
+// Sendable conformance itself, hence @unchecked here.
+final class FirestoreMessagingService: MessagingServicing, @unchecked Sendable {
     private let firestore = Firestore.firestore()
 
     func fetchCounselors() async throws -> [User] {
@@ -52,7 +54,7 @@ final class FirestoreMessagingService: MessagingServicing {
 
     func observeConversations(for userID: String) -> AsyncStream<[Conversation]> {
         AsyncStream { continuation in
-            let listener = firestore.collection("conversations")
+            nonisolated(unsafe) let listener = firestore.collection("conversations")
                 .whereField("participantIDs", arrayContains: userID)
                 .order(by: "createdAt", descending: true)
                 .addSnapshotListener { snapshot, _ in
@@ -65,7 +67,7 @@ final class FirestoreMessagingService: MessagingServicing {
 
     func observeMessages(conversationID: String) -> AsyncStream<[Message]> {
         AsyncStream { continuation in
-            let listener = firestore.collection("conversations").document(conversationID)
+            nonisolated(unsafe) let listener = firestore.collection("conversations").document(conversationID)
                 .collection("messages")
                 .order(by: "sentAt")
                 .addSnapshotListener { snapshot, _ in

@@ -6,20 +6,22 @@ import SolaceCore
 /// Firebase-backed implementation of `AuthServicing`. User profile data
 /// (display name, role) lives in Firestore rather than on the Firebase Auth
 /// user record, since Firebase Auth only stores a handful of built-in fields.
-final class FirebaseAuthService: AuthServicing {
+// Firebase's SDK types (Auth, Firestore) are documented as thread-safe but
+// don't yet carry Sendable conformance themselves, hence @unchecked here.
+final class FirebaseAuthService: AuthServicing, @unchecked Sendable {
     private let auth = Auth.auth()
     private let firestore = Firestore.firestore()
 
     func observeAuthState() -> AsyncStream<SolaceCore.User?> {
         AsyncStream { continuation in
-            let handle = auth.addStateDidChangeListener { [weak self] _, firebaseUser in
+            nonisolated(unsafe) let handle = auth.addStateDidChangeListener { [weak self] _, firebaseUser in
                 guard let self else { return }
-                guard let firebaseUser else {
+                guard let uid = firebaseUser?.uid else {
                     continuation.yield(nil)
                     return
                 }
                 Task {
-                    let user = try? await self.fetchUserProfile(uid: firebaseUser.uid)
+                    let user = try? await self.fetchUserProfile(uid: uid)
                     continuation.yield(user)
                 }
             }
@@ -43,10 +45,10 @@ final class FirebaseAuthService: AuthServicing {
         }
     }
 
-    func signUp(email: String, password: String, displayName: String, role: Role) async throws -> SolaceCore.User {
+    func signUp(email: String, password: String, displayName: String, role: Role, bio: String?) async throws -> SolaceCore.User {
         do {
             let result = try await auth.createUser(withEmail: email, password: password)
-            let user = SolaceCore.User(id: result.user.uid, email: email, displayName: displayName, role: role)
+            let user = SolaceCore.User(id: result.user.uid, email: email, displayName: displayName, role: role, bio: bio)
             try await saveUserProfile(user)
             return user
         } catch let error as AuthError {
@@ -74,12 +76,16 @@ final class FirebaseAuthService: AuthServicing {
     }
 
     private func saveUserProfile(_ user: SolaceCore.User) async throws {
-        try await firestore.collection("users").document(user.id).setData([
+        var data: [String: Any] = [
             "email": user.email,
             "displayName": user.displayName,
             "role": user.role.rawValue,
             "createdAt": FieldValue.serverTimestamp()
-        ])
+        ]
+        if let bio = user.bio {
+            data["bio"] = bio
+        }
+        try await firestore.collection("users").document(user.id).setData(data)
     }
 
     private static func mapAuthError(_ error: Error) -> AuthError {

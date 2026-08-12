@@ -28,6 +28,13 @@ struct SignUpView: View {
                     .pickerStyle(.segmented)
                 }
 
+                if authViewModel.selectedRole == .counselor {
+                    Section("Bio") {
+                        TextField("A short bio students will see", text: $authViewModel.bio, axis: .vertical)
+                            .lineLimit(2...4)
+                    }
+                }
+
                 if let errorMessage = authViewModel.errorMessage {
                     Text(errorMessage)
                         .foregroundStyle(.red)

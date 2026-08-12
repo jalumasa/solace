@@ -21,6 +21,8 @@ struct AuthViewModelTests {
         #expect(viewModel.state == .signedIn(user))
         #expect(viewModel.errorMessage == nil)
         #expect(!viewModel.isLoading)
+        #expect(viewModel.email == "")
+        #expect(viewModel.password == "")
     }
 
     @Test func signInFailureSetsErrorMessage() async {
@@ -40,10 +42,38 @@ struct AuthViewModelTests {
         mock.signUpResult = .success(user)
         let viewModel = AuthViewModel(authService: mock)
         viewModel.selectedRole = .counselor
+        viewModel.displayName = "Sam"
+        viewModel.email = "c@d.com"
+        viewModel.password = "password123"
+        viewModel.bio = "A short bio"
 
         await viewModel.signUp()
 
         #expect(viewModel.state == .signedIn(user))
+        #expect(viewModel.displayName == "")
+        #expect(viewModel.email == "")
+        #expect(viewModel.password == "")
+        #expect(viewModel.bio == "")
+    }
+
+    @Test func formStaysClearedWhenSigningUpAgainAfterSignOut() async {
+        // Regression test: reopening sign-up after signing out must not
+        // inherit the previous account's leftover form values.
+        let mock = MockAuthService()
+        let firstUser = User(id: "1", email: "a@b.com", displayName: "Alex", role: .counselor)
+        mock.signUpResult = .success(firstUser)
+        let viewModel = AuthViewModel(authService: mock)
+        viewModel.displayName = "Alex"
+        viewModel.email = "a@b.com"
+        viewModel.password = "password123"
+        await viewModel.signUp()
+
+        viewModel.signOut()
+
+        #expect(viewModel.displayName == "")
+        #expect(viewModel.email == "")
+        #expect(viewModel.password == "")
+        #expect(viewModel.bio == "")
     }
 
     @Test func authStateObservationUpdatesState() async {

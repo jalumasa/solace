@@ -1,23 +1,41 @@
 import SwiftUI
 import SolaceCore
 
+enum AppTab: Hashable {
+    case today
+    case talk
+    case wellness
+    case games
+    case profile
+}
+
 struct RootTabView: View {
     let currentUser: User
     @Bindable var authViewModel: AuthViewModel
+    @State private var selectedTab: AppTab = .today
 
     var body: some View {
-        TabView {
-            ConversationListView(currentUser: currentUser)
-                .tabItem { Label("Messages", systemImage: "bubble.left.and.bubble.right") }
+        TabView(selection: $selectedTab) {
+            Tab("Today", systemImage: "sun.max.fill", value: AppTab.today) {
+                TodayView(currentUser: currentUser, selectedTab: $selectedTab)
+            }
 
-            ResourceListView()
-                .tabItem { Label("Library", systemImage: "book") }
+            Tab("Talk", systemImage: "bubble.left.and.bubble.right.fill", value: AppTab.talk) {
+                TalkView(currentUser: currentUser)
+            }
 
-            AIChatView()
-                .tabItem { Label("Support Chat", systemImage: "sparkles") }
+            Tab("Wellness", systemImage: "leaf.fill", value: AppTab.wellness) {
+                WellnessView(currentUser: currentUser)
+            }
 
-            ProfileView(currentUser: currentUser, authViewModel: authViewModel)
-                .tabItem { Label("Profile", systemImage: "person.circle") }
+            Tab("Games", systemImage: "gamecontroller.fill", value: AppTab.games) {
+                GamesHomeView(currentUser: currentUser)
+            }
+
+            Tab("Profile", systemImage: "person.crop.circle.fill", value: AppTab.profile) {
+                ProfileView(currentUser: currentUser, authViewModel: authViewModel)
+            }
         }
+        .tabBarMinimizeBehavior(.onScrollDown)
     }
 }

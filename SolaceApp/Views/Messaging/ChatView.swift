@@ -60,6 +60,7 @@ struct ChatView: View {
             }
             .padding()
         }
+        .background(AmbientBackground(colors: Theme.Ambient.talk))
         .navigationTitle(conversation.otherParticipantName(currentUserID: currentUser.id))
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -72,12 +73,22 @@ private struct MessageBubble: View {
     var body: some View {
         HStack {
             if isFromCurrentUser { Spacer(minLength: 40) }
-            Text(message.text)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(isFromCurrentUser ? Color.accentColor : Color(.secondarySystemBackground))
-                .foregroundStyle(isFromCurrentUser ? .white : .primary)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+            Group {
+                if isFromCurrentUser {
+                    Text(message.text)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Theme.primary)
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                } else {
+                    Text(message.text)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .foregroundStyle(.primary)
+                        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                }
+            }
             if !isFromCurrentUser { Spacer(minLength: 40) }
         }
     }

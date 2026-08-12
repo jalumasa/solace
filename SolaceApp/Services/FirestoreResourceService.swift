@@ -6,7 +6,9 @@ import SolaceCore
 /// editorial content stored in Firestore (seeded via the console); relaxation
 /// exercises are self-contained content shipped in the app, since they don't
 /// need remote updates the way articles do.
-final class FirestoreResourceService: ResourceServicing {
+// Firestore's SDK type is documented as thread-safe but doesn't yet carry
+// Sendable conformance itself, hence @unchecked here.
+final class FirestoreResourceService: ResourceServicing, @unchecked Sendable {
     private let firestore = Firestore.firestore()
 
     func fetchResources() async throws -> [ResourceItem] {

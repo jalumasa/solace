@@ -13,6 +13,7 @@ public final class AuthViewModel {
     public var email: String = ""
     public var password: String = ""
     public var displayName: String = ""
+    public var bio: String = ""
     public var selectedRole: Role = .student
     public private(set) var isLoading = false
     public private(set) var errorMessage: String?
@@ -42,6 +43,7 @@ public final class AuthViewModel {
         do {
             let user = try await authService.signIn(email: email, password: password)
             state = .signedIn(user)
+            clearForm()
         } catch {
             errorMessage = Self.message(for: error)
         }
@@ -52,13 +54,16 @@ public final class AuthViewModel {
         isLoading = true
         defer { isLoading = false }
         do {
+            let trimmedBio = bio.trimmingCharacters(in: .whitespacesAndNewlines)
             let user = try await authService.signUp(
                 email: email,
                 password: password,
                 displayName: displayName,
-                role: selectedRole
+                role: selectedRole,
+                bio: trimmedBio.isEmpty ? nil : trimmedBio
             )
             state = .signedIn(user)
+            clearForm()
         } catch {
             errorMessage = Self.message(for: error)
         }
@@ -68,9 +73,22 @@ public final class AuthViewModel {
         do {
             try authService.signOut()
             state = .signedOut
+            clearForm()
         } catch {
             errorMessage = Self.message(for: error)
         }
+    }
+
+    /// Resets sign-in/sign-up form state. Called after any successful auth
+    /// transition so a stale email/password/bio from a previous session
+    /// never lingers into the next one (e.g. signing out and creating a
+    /// different account).
+    private func clearForm() {
+        email = ""
+        password = ""
+        displayName = ""
+        bio = ""
+        errorMessage = nil
     }
 
     private static func message(for error: Error) -> String {

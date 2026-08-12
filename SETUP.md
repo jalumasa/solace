@@ -5,7 +5,10 @@ repo root (generated via XcodeGen — see `project.yml`), with the
 `SolaceCore` local package and the Firebase iOS SDK already wired up as
 dependencies. It builds successfully end-to-end
 (`xcodebuild -project Solace.xcodeproj -scheme Solace -destination
-'platform=iOS Simulator,name=iPhone 17' build`).
+'platform=iOS Simulator,name=iPhone 17 Pro' build`).
+
+The app targets **iOS 26** minimum (it uses Liquid Glass APIs throughout),
+so you'll need Xcode 26+ and an iOS 26 simulator or device.
 
 Running it, though, requires *your own* Firebase project — Firebase refuses
 to start without one (`FirebaseApp.configure()` throws
@@ -51,18 +54,21 @@ firebase deploy --only functions
 
 ## 4. Run it
 
-Open `Solace.xcodeproj`, select an iOS 17+ simulator, and press Cmd+R. Sign
-up once as a counselor and once as a student (two different simulators, or
-sign out and back in) to try the messaging flow end-to-end.
+Open `Solace.xcodeproj`, select an iOS 26+ simulator, and press Cmd+R. Sign
+up once as a counselor (fill in the optional bio — it shows up in the
+student-facing directory) and once as a student (two different simulators,
+or sign out and back in) to try the Talk tab's messaging flow end-to-end.
 
 ## 5. Optional: seed a few articles
 
-The relaxation exercises (breathing timer, grounding script) work out of the
-box with no data — they're shipped in the app. The **Library** tab's articles
-come from a `resources` Firestore collection, which starts empty. Add a few
-documents by hand in the Firebase console (fields: `title`, `summary`,
-`body`, `category` — one of `anxiety`/`stress`/`sleep`/`depression`/`general`
-— and optionally `tags`, an array of strings) to see them appear.
+The relaxation exercises and mini-games work out of the box with no seed
+data — they're all self-contained or write their own Firestore data as you
+use them (mood check-ins, gratitude entries). The **Wellness** tab's
+articles are the one thing that come from a `resources` Firestore
+collection, which starts empty. Add a few documents by hand in the Firebase
+console (fields: `title`, `summary`, `body`, `category` — one of
+`anxiety`/`stress`/`sleep`/`depression`/`general` — and optionally `tags`,
+an array of strings) to see them appear.
 
 ## Regenerating the Xcode project
 

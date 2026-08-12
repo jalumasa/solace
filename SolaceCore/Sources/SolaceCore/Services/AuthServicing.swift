@@ -15,6 +15,6 @@ public protocol AuthServicing: Sendable {
     func observeAuthState() -> AsyncStream<User?>
 
     func signIn(email: String, password: String) async throws -> User
-    func signUp(email: String, password: String, displayName: String, role: Role) async throws -> User
+    func signUp(email: String, password: String, displayName: String, role: Role, bio: String?) async throws -> User
     func signOut() throws
 }

@@ -4,7 +4,6 @@ import SolaceCore
 
 struct AIChatView: View {
     @State private var viewModel = AIChatViewModel(chatService: CloudFunctionAIChatService())
-    @State private var showingCrisisResources = false
 
     var body: some View {
         NavigationStack {
@@ -61,25 +60,12 @@ struct AIChatView: View {
                 }
                 .padding()
             }
+            .background(AmbientBackground(colors: Theme.Ambient.talk))
             .navigationTitle("Support Chat")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        showingCrisisResources = true
-                    } label: {
-                        Image(systemName: "exclamationmark.heart")
-                    }
+                    SOSToolbarButton()
                 }
-            }
-            .sheet(isPresented: $showingCrisisResources) {
-                NavigationStack {
-                    List {
-                        CrisisResourceBanner()
-                    }
-                    .navigationTitle("Crisis Support")
-                    .navigationBarTitleDisplayMode(.inline)
-                }
-                .presentationDetents([.medium])
             }
         }
     }
@@ -93,12 +79,22 @@ private struct AIChatBubble: View {
     var body: some View {
         HStack {
             if isUser { Spacer(minLength: 40) }
-            Text(message.text)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(isUser ? Color.accentColor : Color(.secondarySystemBackground))
-                .foregroundStyle(isUser ? .white : .primary)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+            Group {
+                if isUser {
+                    Text(message.text)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Theme.secondary)
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                } else {
+                    Text(message.text)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .foregroundStyle(.primary)
+                        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                }
+            }
             if !isUser { Spacer(minLength: 40) }
         }
     }

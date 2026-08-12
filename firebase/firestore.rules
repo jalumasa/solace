@@ -26,6 +26,25 @@ service cloud.firestore {
         && request.resource.data.role == resource.data.role; // role is immutable after signup
 
       allow delete: if false;
+
+      // Personal wellness data — owner only, never shared with counselors
+      // or other students.
+      match /moodEntries/{entryId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && request.resource.data.mood is int
+          && request.resource.data.mood >= 1
+          && request.resource.data.mood <= 5;
+        allow update, delete: if isOwner(userId);
+      }
+
+      match /gratitudeEntries/{entryId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0;
+        allow update, delete: if isOwner(userId);
+      }
     }
 
     match /conversations/{conversationId} {

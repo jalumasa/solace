@@ -1,14 +1,30 @@
 import SwiftUI
 import SolaceCore
 
-struct ResourceListView: View {
-    @State private var viewModel = ResourceLibraryViewModel(resourceService: FirestoreResourceService())
+struct WellnessView: View {
+    let currentUser: User
+    @State private var resourceViewModel = ResourceLibraryViewModel(resourceService: FirestoreResourceService())
+    @State private var moodViewModel: TodayViewModel
+
+    init(currentUser: User) {
+        self.currentUser = currentUser
+        _moodViewModel = State(initialValue: TodayViewModel(
+            currentUser: currentUser,
+            moodService: FirestoreMoodService()
+        ))
+    }
 
     var body: some View {
         NavigationStack {
             List {
+                if !moodViewModel.moodHistory.isEmpty {
+                    Section("Mood Insights") {
+                        MoodHistoryChart(entries: moodViewModel.moodHistory)
+                    }
+                }
+
                 Section("Relaxation Exercises") {
-                    ForEach(viewModel.relaxationExercises) { exercise in
+                    ForEach(resourceViewModel.relaxationExercises) { exercise in
                         NavigationLink {
                             destination(for: exercise)
                         } label: {
@@ -23,7 +39,7 @@ struct ResourceListView: View {
                 }
 
                 Section("Articles") {
-                    Picker("Category", selection: $viewModel.selectedCategory) {
+                    Picker("Category", selection: $resourceViewModel.selectedCategory) {
                         Text("All").tag(ResourceCategory?.none)
                         ForEach(ResourceCategory.allCases, id: \.self) { category in
                             Text(category.displayName).tag(ResourceCategory?.some(category))
@@ -31,7 +47,7 @@ struct ResourceListView: View {
                     }
                     .pickerStyle(.navigationLink)
 
-                    ForEach(viewModel.filteredResources) { resource in
+                    ForEach(resourceViewModel.filteredResources) { resource in
                         NavigationLink {
                             ResourceDetailView(resource: resource)
                         } label: {
@@ -50,15 +66,22 @@ struct ResourceListView: View {
                     CrisisResourceBanner()
                 }
             }
-            .navigationTitle("Library")
+            .scrollContentBackground(.hidden)
+            .background(AmbientBackground(colors: Theme.Ambient.wellness))
+            .navigationTitle("Wellness")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    SOSToolbarButton()
+                }
+            }
             .task {
-                await viewModel.load()
+                await resourceViewModel.load()
             }
             .refreshable {
-                await viewModel.load()
+                await resourceViewModel.load()
             }
             .overlay {
-                if viewModel.isLoading && viewModel.resources.isEmpty {
+                if resourceViewModel.isLoading && resourceViewModel.resources.isEmpty {
                     ProgressView()
                 }
             }
@@ -74,8 +97,4 @@ struct ResourceListView: View {
             GroundingScriptView(exercise: exercise, steps: steps)
         }
     }
-}
-
-#Preview {
-    ResourceListView()
 }
