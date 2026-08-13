@@ -51,8 +51,10 @@ struct SignUpView: View {
                     } label: {
                         if authViewModel.isLoading {
                             ProgressView()
+                                .frame(maxWidth: .infinity)
                         } else {
                             Text("Create Account")
+                                .frame(maxWidth: .infinity)
                         }
                     }
                     .disabled(
@@ -63,6 +65,8 @@ struct SignUpView: View {
                     )
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(AmbientBackground(colors: Theme.Ambient.today))
             .navigationTitle("Create Account")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

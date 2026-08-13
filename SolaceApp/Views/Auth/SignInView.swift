@@ -7,61 +7,74 @@ struct SignInView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                VStack(spacing: 8) {
-                    Image(systemName: "leaf.fill")
-                        .font(.system(size: 48))
-                        .foregroundStyle(.teal)
-                    Text("Solace")
-                        .font(.largeTitle.bold())
-                    Text("A quiet space for student wellbeing.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.top, 40)
+            ZStack {
+                AmbientBackground(colors: Theme.Ambient.today)
 
-                VStack(spacing: 12) {
-                    TextField("Email", text: $authViewModel.email)
-                        .textContentType(.emailAddress)
-                        .keyboardType(.emailAddress)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .textFieldStyle(.roundedBorder)
+                ScrollView {
+                    VStack(spacing: Theme.Spacing.large) {
+                        VStack(spacing: Theme.Spacing.small) {
+                            Image(systemName: "leaf.fill")
+                                .font(.system(size: 44))
+                                .foregroundStyle(Theme.primary)
+                                .frame(width: 96, height: 96)
+                                .glassEffect(.regular, in: Circle())
 
-                    SecureField("Password", text: $authViewModel.password)
-                        .textContentType(.password)
-                        .textFieldStyle(.roundedBorder)
-                }
+                            Text("Solace")
+                                .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                            Text("A quiet space for student wellbeing.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.top, 60)
 
-                if let errorMessage = authViewModel.errorMessage {
-                    Text(errorMessage)
-                        .font(.footnote)
-                        .foregroundStyle(.red)
-                }
+                        VStack(spacing: Theme.Spacing.medium) {
+                            TextField("Email", text: $authViewModel.email)
+                                .textContentType(.emailAddress)
+                                .keyboardType(.emailAddress)
+                                .textInputAutocapitalization(.never)
+                                .autocorrectionDisabled()
+                                .textFieldStyle(.roundedBorder)
 
-                Button {
-                    Task { await authViewModel.signIn() }
-                } label: {
-                    if authViewModel.isLoading {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
-                    } else {
-                        Text("Sign In")
-                            .frame(maxWidth: .infinity)
+                            SecureField("Password", text: $authViewModel.password)
+                                .textContentType(.password)
+                                .textFieldStyle(.roundedBorder)
+
+                            if let errorMessage = authViewModel.errorMessage {
+                                Text(errorMessage)
+                                    .font(.footnote)
+                                    .foregroundStyle(.red)
+                            }
+
+                            Button {
+                                Task { await authViewModel.signIn() }
+                            } label: {
+                                if authViewModel.isLoading {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                } else {
+                                    Text("Sign In")
+                                        .fontWeight(.semibold)
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
+                            .buttonStyle(.glassProminent)
+                            .controlSize(.large)
+                            .disabled(authViewModel.isLoading || authViewModel.email.isEmpty || authViewModel.password.isEmpty)
+
+                            Button("Create an account") {
+                                showingSignUp = true
+                            }
+                            .font(.subheadline.weight(.medium))
+                        }
+                        .padding(Theme.Spacing.large)
+                        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: Theme.Radius.card))
+                        .padding(.horizontal, Theme.Spacing.medium)
+
+                        Spacer(minLength: 40)
                     }
+                    .padding(.bottom, Theme.Spacing.large)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .disabled(authViewModel.isLoading || authViewModel.email.isEmpty || authViewModel.password.isEmpty)
-
-                Button("Create an account") {
-                    showingSignUp = true
-                }
-                .font(.footnote)
-
-                Spacer()
             }
-            .padding()
             .sheet(isPresented: $showingSignUp) {
                 SignUpView(authViewModel: authViewModel)
             }
