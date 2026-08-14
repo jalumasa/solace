@@ -20,9 +20,9 @@
 		3FC1E44CBEFB7AFE01054073 /* AmbientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B33920EEDAE010CB88202F1 /* AmbientBackground.swift */; };
 		419D95108C4D522346D37F90 /* TalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D025C779313AFAEA59DD79C /* TalkView.swift */; };
 		4DA8A24EE639C84E9376F429 /* FirestoreMessagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BBE82373222DD94C86607 /* FirestoreMessagingService.swift */; };
+		4E0BE6432591187D16C7A3E7 /* WorryJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF5FD36C6A9F85C50EA162 /* WorryJarView.swift */; };
 		5CA71F2EA360102E8F16CA2B /* MoodHistoryChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81B9F655847575146674DB6 /* MoodHistoryChart.swift */; };
 		5F9F57F5895F5E27368065DB /* SolaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6D9C3B940A9BBF1333720 /* SolaceApp.swift */; };
-		6178D35970EEE92E25856E36 /* CounselorDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48B6A92266DFEF385FF93E1 /* CounselorDirectoryView.swift */; };
 		6E2C3B763DCBED1F8A5D889E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DBAFF077D642DE75A5B35E66 /* FirebaseFirestore */; };
 		6E5CC8E43333F401D5EFC737 /* BreathingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698D095E9839297FE0772B8 /* BreathingSessionView.swift */; };
 		750A6EBF2DA3ABBFCB3A5E23 /* MoodCheckInCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B97CB103C0ACFB22A8638 /* MoodCheckInCard.swift */; };
@@ -45,6 +45,7 @@
 		BF54DF14EDF0B427E48FF130 /* FirestoreJournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02881DFB8ADACC5C1A6A6F1 /* FirestoreJournalService.swift */; };
 		C80DCC9E9E4A77AF7532C9F0 /* FirestoreResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6070D05918BB83671B9BB /* FirestoreResourceService.swift */; };
 		CCA9E95D70AE3D2E60E13F93 /* StreakCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDCF85AA94BC4D415EF6337 /* StreakCard.swift */; };
+		DB0256C86ED5517613746270 /* ZenGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83DBD1BEF4919F3F7E4B4A /* ZenGardenView.swift */; };
 		E1193A908F2B2543A73C52E0 /* AIChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44051516D1E4D08277FCBAD8 /* AIChatView.swift */; };
 		E68EE097F42E6C1B84D43F66 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA5724012448A9B3EAC0EE /* SignInView.swift */; };
 		FDB340C5CCCAB3CE23E67EA0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5DB63CB3CA154F901CECBE /* OnboardingView.swift */; };
@@ -53,9 +54,11 @@
 /* Begin PBXFileReference section */
 		01C282E6E6D0F74D801D5AFB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0B33920EEDAE010CB88202F1 /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
+		1B83DBD1BEF4919F3F7E4B4A /* ZenGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenGardenView.swift; sourceTree = "<group>"; };
 		1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		21B1E031B92D0C8E6A90D837 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		232B7142C7F8694D4C10A948 /* FocusRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusRingsView.swift; sourceTree = "<group>"; };
+		25DF5FD36C6A9F85C50EA162 /* WorryJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorryJarView.swift; sourceTree = "<group>"; };
 		296B4E734BB29BCD208B6B72 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		314268667B2D01CBD8B84AAE /* FirestoreMoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMoodService.swift; sourceTree = "<group>"; };
 		3672F4A6E70E9E6BAFE4CCA0 /* GroundingScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundingScriptView.swift; sourceTree = "<group>"; };
@@ -85,7 +88,6 @@
 		D8F87601D2730B4017414BFE /* SolaceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SolaceCore; path = SolaceCore; sourceTree = SOURCE_ROOT; };
 		DBB7E2DC8DF98990709E0A06 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		E19BAA99A17D884EBC04417F /* ResourceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceDetailView.swift; sourceTree = "<group>"; };
-		E48B6A92266DFEF385FF93E1 /* CounselorDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDirectoryView.swift; sourceTree = "<group>"; };
 		F2E74002801ACBE11DF794B2 /* QuickActionsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsGrid.swift; sourceTree = "<group>"; };
 		F90A1939C64929F47F208125 /* GratitudeGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudeGardenView.swift; sourceTree = "<group>"; };
 		FA29A44DD5148379D8F5B98D /* AuthRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootView.swift; sourceTree = "<group>"; };
@@ -167,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				DBB7E2DC8DF98990709E0A06 /* ChatView.swift */,
-				E48B6A92266DFEF385FF93E1 /* CounselorDirectoryView.swift */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
@@ -277,6 +278,8 @@
 				232B7142C7F8694D4C10A948 /* FocusRingsView.swift */,
 				70120A974DBACC9F05383C20 /* GamesHomeView.swift */,
 				F90A1939C64929F47F208125 /* GratitudeGardenView.swift */,
+				25DF5FD36C6A9F85C50EA162 /* WorryJarView.swift */,
+				1B83DBD1BEF4919F3F7E4B4A /* ZenGardenView.swift */,
 			);
 			path = Games;
 			sourceTree = "<group>";
@@ -387,7 +390,6 @@
 				919F9CE6AFAA9E43BF57F1EA /* BubblePopView.swift in Sources */,
 				A586460F7DE0145D2F680955 /* ChatView.swift in Sources */,
 				BE785E00D0EE9739E7D27E18 /* CloudFunctionAIChatService.swift in Sources */,
-				6178D35970EEE92E25856E36 /* CounselorDirectoryView.swift in Sources */,
 				39E06395DB9E28248B6EE8DD /* CrisisResourceBanner.swift in Sources */,
 				A52D7E31071B4678B8E06E8D /* CrisisSheet.swift in Sources */,
 				30F0B56750EA6ADD18675788 /* FirebaseAuthService.swift in Sources */,
@@ -415,6 +417,8 @@
 				87B56E5D4E10A94406961EBA /* Theme.swift in Sources */,
 				09155BE004CF47F9D784F86F /* TodayView.swift in Sources */,
 				8084EA29D8D806B45965D5ED /* WellnessView.swift in Sources */,
+				4E0BE6432591187D16C7A3E7 /* WorryJarView.swift in Sources */,
+				DB0256C86ED5517613746270 /* ZenGardenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

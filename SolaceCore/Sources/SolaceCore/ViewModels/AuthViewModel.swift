@@ -14,6 +14,9 @@ public final class AuthViewModel {
     public var password: String = ""
     public var displayName: String = ""
     public var bio: String = ""
+    public var major: String = ""
+    public var academicYear: AcademicYear?
+    public var age: String = ""
     public var selectedRole: Role = .student
     public private(set) var isLoading = false
     public private(set) var errorMessage: String?
@@ -55,13 +58,18 @@ public final class AuthViewModel {
         defer { isLoading = false }
         do {
             let trimmedBio = bio.trimmingCharacters(in: .whitespacesAndNewlines)
-            let user = try await authService.signUp(
+            let trimmedMajor = major.trimmingCharacters(in: .whitespacesAndNewlines)
+            let details = SignUpDetails(
                 email: email,
                 password: password,
                 displayName: displayName,
                 role: selectedRole,
-                bio: trimmedBio.isEmpty ? nil : trimmedBio
+                bio: trimmedBio.isEmpty ? nil : trimmedBio,
+                major: (selectedRole == .student && !trimmedMajor.isEmpty) ? trimmedMajor : nil,
+                academicYear: selectedRole == .student ? academicYear : nil,
+                age: selectedRole == .student ? Int(age) : nil
             )
+            let user = try await authService.signUp(details)
             state = .signedIn(user)
             clearForm()
         } catch {
@@ -88,6 +96,9 @@ public final class AuthViewModel {
         password = ""
         displayName = ""
         bio = ""
+        major = ""
+        academicYear = nil
+        age = ""
         errorMessage = nil
     }
 

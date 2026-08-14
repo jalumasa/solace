@@ -6,6 +6,10 @@ public struct User: Identifiable, Codable, Sendable, Equatable {
     public var displayName: String
     public var role: Role
     public var bio: String?
+    /// Student-only academic details. Always nil for counselors.
+    public var major: String?
+    public var academicYear: AcademicYear?
+    public var age: Int?
     public var createdAt: Date
 
     public init(
@@ -14,6 +18,9 @@ public struct User: Identifiable, Codable, Sendable, Equatable {
         displayName: String,
         role: Role,
         bio: String? = nil,
+        major: String? = nil,
+        academicYear: AcademicYear? = nil,
+        age: Int? = nil,
         createdAt: Date = Date()
     ) {
         self.id = id
@@ -21,6 +28,9 @@ public struct User: Identifiable, Codable, Sendable, Equatable {
         self.displayName = displayName
         self.role = role
         self.bio = bio
+        self.major = major
+        self.academicYear = academicYear
+        self.age = age
         self.createdAt = createdAt
     }
 }

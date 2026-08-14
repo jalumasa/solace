@@ -66,6 +66,30 @@ public struct RelaxationExercise: Identifiable, Sendable, Equatable {
                 "Name 2 things you can smell.",
                 "Name 1 thing you can taste."
             ])
+        ),
+        RelaxationExercise(
+            id: "body-scan",
+            title: "Body Scan",
+            description: "A slow pass through the body to notice and release tension.",
+            kind: .groundingScript(steps: [
+                "Notice your feet touching the ground.",
+                "Relax your shoulders away from your ears.",
+                "Unclench your jaw and let your tongue rest.",
+                "Soften your hands, even if they're empty.",
+                "Take one more full breath before you go."
+            ])
+        ),
+        RelaxationExercise(
+            id: "three-good-things",
+            title: "Three Good Things",
+            description: "A short gratitude reflection to close out a hard day.",
+            kind: .groundingScript(steps: [
+                "Think of one small thing that went well today.",
+                "Notice how that feels in your body right now.",
+                "Think of one person you're grateful for.",
+                "Think of one thing your body did for you today.",
+                "Carry just one of these with you as you go."
+            ])
         )
     ]
 }

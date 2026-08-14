@@ -99,7 +99,11 @@ final class FirestoreMessagingService: MessagingServicing, @unchecked Sendable {
             id: document.documentID,
             email: data["email"] as? String ?? "",
             displayName: data["displayName"] as? String ?? "",
-            role: role
+            role: role,
+            bio: data["bio"] as? String,
+            major: data["major"] as? String,
+            academicYear: (data["academicYear"] as? String).flatMap(AcademicYear.init(rawValue:)),
+            age: data["age"] as? Int
         )
     }
 

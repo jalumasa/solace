@@ -35,6 +35,23 @@ struct SignUpView: View {
                     }
                 }
 
+                if authViewModel.selectedRole == .student {
+                    Section("Academic Details") {
+                        TextField("Major or field of study", text: $authViewModel.major)
+                            .textContentType(.none)
+
+                        Picker("Academic year", selection: $authViewModel.academicYear) {
+                            Text("Not set").tag(AcademicYear?.none)
+                            ForEach(AcademicYear.allCases, id: \.self) { year in
+                                Text(year.label).tag(AcademicYear?.some(year))
+                            }
+                        }
+
+                        TextField("Age", text: $authViewModel.age)
+                            .keyboardType(.numberPad)
+                    }
+                }
+
                 if let errorMessage = authViewModel.errorMessage {
                     Text(errorMessage)
                         .foregroundStyle(.red)

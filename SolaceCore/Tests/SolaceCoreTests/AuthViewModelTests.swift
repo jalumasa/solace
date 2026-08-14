@@ -56,6 +56,46 @@ struct AuthViewModelTests {
         #expect(viewModel.bio == "")
     }
 
+    @Test func signUpAsStudentPassesAcademicDetails() async {
+        let mock = MockAuthService()
+        let user = User(id: "4", email: "s@d.com", displayName: "Riley", role: .student)
+        mock.signUpResult = .success(user)
+        let viewModel = AuthViewModel(authService: mock)
+        viewModel.selectedRole = .student
+        viewModel.displayName = "Riley"
+        viewModel.email = "s@d.com"
+        viewModel.password = "password123"
+        viewModel.major = "Computer Science"
+        viewModel.academicYear = .junior
+        viewModel.age = "20"
+
+        await viewModel.signUp()
+
+        #expect(mock.lastSignUpDetails?.major == "Computer Science")
+        #expect(mock.lastSignUpDetails?.academicYear == .junior)
+        #expect(mock.lastSignUpDetails?.age == 20)
+    }
+
+    @Test func signUpAsCounselorOmitsAcademicDetails() async {
+        let mock = MockAuthService()
+        let user = User(id: "5", email: "c@d.com", displayName: "Sam", role: .counselor)
+        mock.signUpResult = .success(user)
+        let viewModel = AuthViewModel(authService: mock)
+        viewModel.selectedRole = .counselor
+        viewModel.displayName = "Sam"
+        viewModel.email = "c@d.com"
+        viewModel.password = "password123"
+        viewModel.major = "Should be ignored"
+        viewModel.academicYear = .senior
+        viewModel.age = "30"
+
+        await viewModel.signUp()
+
+        #expect(mock.lastSignUpDetails?.major == nil)
+        #expect(mock.lastSignUpDetails?.academicYear == nil)
+        #expect(mock.lastSignUpDetails?.age == nil)
+    }
+
     @Test func formStaysClearedWhenSigningUpAgainAfterSignOut() async {
         // Regression test: reopening sign-up after signing out must not
         // inherit the previous account's leftover form values.

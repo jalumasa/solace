@@ -45,10 +45,19 @@ final class FirebaseAuthService: AuthServicing, @unchecked Sendable {
         }
     }
 
-    func signUp(email: String, password: String, displayName: String, role: Role, bio: String?) async throws -> SolaceCore.User {
+    func signUp(_ details: SignUpDetails) async throws -> SolaceCore.User {
         do {
-            let result = try await auth.createUser(withEmail: email, password: password)
-            let user = SolaceCore.User(id: result.user.uid, email: email, displayName: displayName, role: role, bio: bio)
+            let result = try await auth.createUser(withEmail: details.email, password: details.password)
+            let user = SolaceCore.User(
+                id: result.user.uid,
+                email: details.email,
+                displayName: details.displayName,
+                role: details.role,
+                bio: details.bio,
+                major: details.major,
+                academicYear: details.academicYear,
+                age: details.age
+            )
             try await saveUserProfile(user)
             return user
         } catch let error as AuthError {
@@ -71,6 +80,9 @@ final class FirebaseAuthService: AuthServicing, @unchecked Sendable {
             displayName: data["displayName"] as? String ?? "",
             role: Role(rawValue: data["role"] as? String ?? "") ?? .student,
             bio: data["bio"] as? String,
+            major: data["major"] as? String,
+            academicYear: (data["academicYear"] as? String).flatMap(AcademicYear.init(rawValue:)),
+            age: data["age"] as? Int,
             createdAt: (data["createdAt"] as? Timestamp)?.dateValue() ?? Date()
         )
     }
@@ -84,6 +96,15 @@ final class FirebaseAuthService: AuthServicing, @unchecked Sendable {
         ]
         if let bio = user.bio {
             data["bio"] = bio
+        }
+        if let major = user.major {
+            data["major"] = major
+        }
+        if let academicYear = user.academicYear {
+            data["academicYear"] = academicYear.rawValue
+        }
+        if let age = user.age {
+            data["age"] = age
         }
         try await firestore.collection("users").document(user.id).setData(data)
     }

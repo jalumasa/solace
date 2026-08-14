@@ -45,6 +45,28 @@ struct GamesHomeView: View {
                         tint: Theme.secondary
                     )
                 }
+
+                NavigationLink {
+                    ZenGardenView()
+                } label: {
+                    GameRow(
+                        title: "Zen Garden",
+                        subtitle: "Rake calming patterns into sand — nothing to get wrong",
+                        systemImage: "water.waves",
+                        tint: Theme.sun
+                    )
+                }
+
+                NavigationLink {
+                    WorryJarView()
+                } label: {
+                    GameRow(
+                        title: "Worry Jar",
+                        subtitle: "Write down a worry, then let it go",
+                        systemImage: "wind",
+                        tint: Theme.coral
+                    )
+                }
             }
             .scrollContentBackground(.hidden)
             .background(AmbientBackground(colors: Theme.Ambient.games))

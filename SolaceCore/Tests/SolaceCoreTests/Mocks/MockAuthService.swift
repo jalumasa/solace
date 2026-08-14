@@ -25,8 +25,11 @@ final class MockAuthService: AuthServicing, @unchecked Sendable {
         try signInResult.get()
     }
 
-    func signUp(email: String, password: String, displayName: String, role: Role, bio: String?) async throws -> User {
-        try signUpResult.get()
+    private(set) var lastSignUpDetails: SignUpDetails?
+
+    func signUp(_ details: SignUpDetails) async throws -> User {
+        lastSignUpDetails = details
+        return try signUpResult.get()
     }
 
     func signOut() throws {

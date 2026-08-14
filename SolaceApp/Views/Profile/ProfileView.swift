@@ -15,6 +15,10 @@ struct ProfileView: View {
         ))
     }
 
+    private var hasAcademicDetails: Bool {
+        currentUser.major != nil || currentUser.academicYear != nil || currentUser.age != nil
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -22,6 +26,26 @@ struct ProfileView: View {
                     LabeledContent("Name", value: currentUser.displayName)
                     LabeledContent("Email", value: currentUser.email)
                     LabeledContent("Role", value: currentUser.role == .student ? "Student" : "Counselor")
+                }
+
+                if currentUser.role == .student, hasAcademicDetails {
+                    Section("Academic Details") {
+                        if let major = currentUser.major {
+                            LabeledContent("Major", value: major)
+                        }
+                        if let academicYear = currentUser.academicYear {
+                            LabeledContent("Academic year", value: academicYear.label)
+                        }
+                        if let age = currentUser.age {
+                            LabeledContent("Age", value: "\(age)")
+                        }
+                    }
+                }
+
+                if currentUser.role == .counselor, let bio = currentUser.bio, !bio.isEmpty {
+                    Section("Bio") {
+                        Text(bio)
+                    }
                 }
 
                 Section("Your Progress") {
