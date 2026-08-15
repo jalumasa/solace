@@ -9,19 +9,19 @@ struct TodayViewModelTests {
     }
 
     @Test func greetingIncludesDisplayName() {
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: MockMoodService())
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: MockMoodService(), journalService: MockJournalService())
         #expect(viewModel.greeting.contains("Alex"))
     }
 
     @Test func hasNotCheckedInTodayWithNoHistory() {
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: MockMoodService())
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: MockMoodService(), journalService: MockJournalService())
         #expect(!viewModel.hasCheckedInToday)
         #expect(viewModel.streak == 0)
     }
 
     @Test func hasCheckedInTodayAfterTodaysEntry() async {
         let mock = MockMoodService()
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock)
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock, journalService: MockJournalService())
         let entry = MoodEntry(id: "1", mood: .good, createdAt: Date())
 
         mock.emit([entry])
@@ -33,7 +33,7 @@ struct TodayViewModelTests {
 
     @Test func streakCountsConsecutiveDaysEndingYesterday() async {
         let mock = MockMoodService()
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock)
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock, journalService: MockJournalService())
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
@@ -51,7 +51,7 @@ struct TodayViewModelTests {
 
     @Test func streakBreaksOnGap() async {
         let mock = MockMoodService()
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock)
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock, journalService: MockJournalService())
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         let threeDaysAgo = calendar.date(byAdding: .day, value: -3, to: today)!
@@ -64,7 +64,7 @@ struct TodayViewModelTests {
 
     @Test func logMoodSuccessCallsService() async {
         let mock = MockMoodService()
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock)
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock, journalService: MockJournalService())
 
         await viewModel.logMood(.great, note: "Good day")
 
@@ -79,10 +79,35 @@ struct TodayViewModelTests {
     @Test func logMoodFailureSetsErrorMessage() async {
         let mock = MockMoodService()
         mock.logMoodError = TestError()
-        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock)
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: mock, journalService: MockJournalService())
 
         await viewModel.logMood(.bad)
 
         #expect(viewModel.errorMessage != nil)
+    }
+
+    @Test func gratitudeOnlyDayCountsTowardStreak() async {
+        let moodMock = MockMoodService()
+        let journalMock = MockJournalService()
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: moodMock, journalService: journalMock)
+        let entry = GratitudeEntry(id: "g1", text: "Sunny weather", createdAt: Date())
+
+        journalMock.emit([entry])
+        await allowStreamDelivery()
+
+        #expect(viewModel.streak == 1)
+    }
+
+    @Test func moodAndGratitudeOnSameDayDoNotDoubleCountStreak() async {
+        let moodMock = MockMoodService()
+        let journalMock = MockJournalService()
+        let viewModel = TodayViewModel(currentUser: makeUser(), moodService: moodMock, journalService: journalMock)
+        let now = Date()
+
+        moodMock.emit([MoodEntry(id: "1", mood: .good, createdAt: now)])
+        journalMock.emit([GratitudeEntry(id: "g1", text: "Good coffee", createdAt: now)])
+        await allowStreamDelivery()
+
+        #expect(viewModel.streak == 1)
     }
 }

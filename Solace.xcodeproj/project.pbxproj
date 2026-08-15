@@ -13,16 +13,20 @@
 		2C5F41597C3B7663DFE50DF0 /* SolaceCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7BF77AFDE58F039D82DAE84A /* SolaceCore */; };
 		2D984FA1547AC0B0212C0FDF /* GratitudeGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A1939C64929F47F208125 /* GratitudeGardenView.swift */; };
 		30F0B56750EA6ADD18675788 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */; };
+		33E772C9BBA57C85FE586E8A /* CircleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6C6A68A90D41A321FA5FF2 /* CircleListView.swift */; };
 		33F4E2DBD5856CD86E410D3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE8957C9F2FEB42F1A76A007 /* GoogleService-Info.plist */; };
 		3871DEE5B59642B44C76374E /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979399AD6FEF61BB1E1B9742 /* RootTabView.swift */; };
 		39E06395DB9E28248B6EE8DD /* CrisisResourceBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99343A0E67F464ACB9FB432F /* CrisisResourceBanner.swift */; };
+		3E66D84C422C1CC394B65CF3 /* RequestAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F1A746D7FBCB7ED575AABE /* RequestAppointmentView.swift */; };
 		3EA78A387E331E2737BB3158 /* FocusRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B7142C7F8694D4C10A948 /* FocusRingsView.swift */; };
 		3FC1E44CBEFB7AFE01054073 /* AmbientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B33920EEDAE010CB88202F1 /* AmbientBackground.swift */; };
 		419D95108C4D522346D37F90 /* TalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D025C779313AFAEA59DD79C /* TalkView.swift */; };
 		4DA8A24EE639C84E9376F429 /* FirestoreMessagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BBE82373222DD94C86607 /* FirestoreMessagingService.swift */; };
 		4E0BE6432591187D16C7A3E7 /* WorryJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF5FD36C6A9F85C50EA162 /* WorryJarView.swift */; };
+		4EB8E7FE33B81F4B1571FF59 /* FirestoreCircleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5641F9C35F33ED993EB6E8 /* FirestoreCircleService.swift */; };
 		5CA71F2EA360102E8F16CA2B /* MoodHistoryChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81B9F655847575146674DB6 /* MoodHistoryChart.swift */; };
 		5F9F57F5895F5E27368065DB /* SolaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6D9C3B940A9BBF1333720 /* SolaceApp.swift */; };
+		637B9AF29CA58B10242C1A8D /* AppointmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96052DC4113B0762EEF8B638 /* AppointmentListView.swift */; };
 		6E2C3B763DCBED1F8A5D889E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DBAFF077D642DE75A5B35E66 /* FirebaseFirestore */; };
 		6E5CC8E43333F401D5EFC737 /* BreathingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698D095E9839297FE0772B8 /* BreathingSessionView.swift */; };
 		750A6EBF2DA3ABBFCB3A5E23 /* MoodCheckInCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B97CB103C0ACFB22A8638 /* MoodCheckInCard.swift */; };
@@ -31,9 +35,13 @@
 		825453E0F9C6B9772C1A311C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 37698DB6E2E466F430B58E98 /* FirebaseCore */; };
 		87B56E5D4E10A94406961EBA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C282E6E6D0F74D801D5AFB /* Theme.swift */; };
 		8B9CFD5AE6EFB94BD7113F80 /* AuthRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29A44DD5148379D8F5B98D /* AuthRootView.swift */; };
+		916E1E1ACD9A2E71FF9346D5 /* ReminderSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBDF1F20C6C55B1126BE7A /* ReminderSettingsSection.swift */; };
 		919F9CE6AFAA9E43BF57F1EA /* BubblePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE28824CABA7F79BC8E6E3D8 /* BubblePopView.swift */; };
+		9667CCA2E4B0B31066E5E241 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D13C38FA2B450A0B4887E0 /* NotificationScheduler.swift */; };
 		99EAE74B6FF2B8199BFFBAFD /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 1FC59B2C5782542582D3D48D /* FirebaseFunctions */; };
+		9CCFA1C8D5C362BECEEEC540 /* CircleChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14B780CC9C4B8959AB5403B /* CircleChatView.swift */; };
 		9F5E479F8069B2365689D098 /* QuickActionsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E74002801ACBE11DF794B2 /* QuickActionsGrid.swift */; };
+		A0D3D3EC7B53CA5168911550 /* FirestoreAppointmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7E3A18B057DBD64F047429 /* FirestoreAppointmentService.swift */; };
 		A52D7E31071B4678B8E06E8D /* CrisisSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86478772623D7FC2DDE00135 /* CrisisSheet.swift */; };
 		A586460F7DE0145D2F680955 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7E2DC8DF98990709E0A06 /* ChatView.swift */; };
 		A74164C96BDB43051FA10964 /* GamesHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70120A974DBACC9F05383C20 /* GamesHomeView.swift */; };
@@ -53,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		01C282E6E6D0F74D801D5AFB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		05F1A746D7FBCB7ED575AABE /* RequestAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppointmentView.swift; sourceTree = "<group>"; };
 		0B33920EEDAE010CB88202F1 /* AmbientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBackground.swift; sourceTree = "<group>"; };
 		1B83DBD1BEF4919F3F7E4B4A /* ZenGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenGardenView.swift; sourceTree = "<group>"; };
 		1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
@@ -62,6 +71,7 @@
 		296B4E734BB29BCD208B6B72 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		314268667B2D01CBD8B84AAE /* FirestoreMoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMoodService.swift; sourceTree = "<group>"; };
 		3672F4A6E70E9E6BAFE4CCA0 /* GroundingScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundingScriptView.swift; sourceTree = "<group>"; };
+		36BBDF1F20C6C55B1126BE7A /* ReminderSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsSection.swift; sourceTree = "<group>"; };
 		3B707345ED9DB7F2F7B0AD4A /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		3DDCF85AA94BC4D415EF6337 /* StreakCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCard.swift; sourceTree = "<group>"; };
 		43E6070D05918BB83671B9BB /* FirestoreResourceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreResourceService.swift; sourceTree = "<group>"; };
@@ -71,9 +81,11 @@
 		582B97CB103C0ACFB22A8638 /* MoodCheckInCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckInCard.swift; sourceTree = "<group>"; };
 		70120A974DBACC9F05383C20 /* GamesHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesHomeView.swift; sourceTree = "<group>"; };
 		74E147A01B77010B152B8A80 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		7B6C6A68A90D41A321FA5FF2 /* CircleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleListView.swift; sourceTree = "<group>"; };
 		81B6D9C3B940A9BBF1333720 /* SolaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolaceApp.swift; sourceTree = "<group>"; };
 		86478772623D7FC2DDE00135 /* CrisisSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrisisSheet.swift; sourceTree = "<group>"; };
 		8D025C779313AFAEA59DD79C /* TalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkView.swift; sourceTree = "<group>"; };
+		96052DC4113B0762EEF8B638 /* AppointmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListView.swift; sourceTree = "<group>"; };
 		9698D095E9839297FE0772B8 /* BreathingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingSessionView.swift; sourceTree = "<group>"; };
 		979399AD6FEF61BB1E1B9742 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		98BB9581FE6904E33A59CCDF /* WellnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellnessView.swift; sourceTree = "<group>"; };
@@ -85,12 +97,16 @@
 		BE8957C9F2FEB42F1A76A007 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C02881DFB8ADACC5C1A6A6F1 /* FirestoreJournalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreJournalService.swift; sourceTree = "<group>"; };
 		C12DC2AB9036E7BA77F2B0B4 /* CloudFunctionAIChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAIChatService.swift; sourceTree = "<group>"; };
+		D14B780CC9C4B8959AB5403B /* CircleChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChatView.swift; sourceTree = "<group>"; };
 		D8F87601D2730B4017414BFE /* SolaceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SolaceCore; path = SolaceCore; sourceTree = SOURCE_ROOT; };
 		DBB7E2DC8DF98990709E0A06 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		E19BAA99A17D884EBC04417F /* ResourceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceDetailView.swift; sourceTree = "<group>"; };
+		E6D13C38FA2B450A0B4887E0 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		EB7E3A18B057DBD64F047429 /* FirestoreAppointmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreAppointmentService.swift; sourceTree = "<group>"; };
 		F2E74002801ACBE11DF794B2 /* QuickActionsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsGrid.swift; sourceTree = "<group>"; };
 		F90A1939C64929F47F208125 /* GratitudeGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudeGardenView.swift; sourceTree = "<group>"; };
 		FA29A44DD5148379D8F5B98D /* AuthRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootView.swift; sourceTree = "<group>"; };
+		FB5641F9C35F33ED993EB6E8 /* FirestoreCircleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCircleService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +130,9 @@
 			children = (
 				979399AD6FEF61BB1E1B9742 /* RootTabView.swift */,
 				AD9486833712AB40A6327C2E /* AIChat */,
+				C3345F7C32855CE37D6E0B62 /* Appointments */,
 				A4D93369237541A4FBD0E28D /* Auth */,
+				9FB2C75E09CCA5174AEECA37 /* Circles */,
 				CE423FA046ABB6AD3D192EB0 /* Games */,
 				1CB17D1AC23C857992C3FE0D /* Library */,
 				3089C5457A964A3D5CC842B4 /* Messaging */,
@@ -133,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				74E147A01B77010B152B8A80 /* ProfileView.swift */,
+				36BBDF1F20C6C55B1126BE7A /* ReminderSettingsSection.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -186,10 +205,13 @@
 			children = (
 				C12DC2AB9036E7BA77F2B0B4 /* CloudFunctionAIChatService.swift */,
 				1C76058F1478E081D72208A5 /* FirebaseAuthService.swift */,
+				EB7E3A18B057DBD64F047429 /* FirestoreAppointmentService.swift */,
+				FB5641F9C35F33ED993EB6E8 /* FirestoreCircleService.swift */,
 				C02881DFB8ADACC5C1A6A6F1 /* FirestoreJournalService.swift */,
 				B97BBE82373222DD94C86607 /* FirestoreMessagingService.swift */,
 				314268667B2D01CBD8B84AAE /* FirestoreMoodService.swift */,
 				43E6070D05918BB83671B9BB /* FirestoreResourceService.swift */,
+				E6D13C38FA2B450A0B4887E0 /* NotificationScheduler.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -208,6 +230,15 @@
 				D8F87601D2730B4017414BFE /* SolaceCore */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		9FB2C75E09CCA5174AEECA37 /* Circles */ = {
+			isa = PBXGroup;
+			children = (
+				D14B780CC9C4B8959AB5403B /* CircleChatView.swift */,
+				7B6C6A68A90D41A321FA5FF2 /* CircleListView.swift */,
+			);
+			path = Circles;
 			sourceTree = "<group>";
 		};
 		A4D93369237541A4FBD0E28D /* Auth */ = {
@@ -253,6 +284,15 @@
 				EA71AC65D49480800ECE66BD /* SolaceApp */,
 				8827A92F23EA0BD3E918DA8F /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		C3345F7C32855CE37D6E0B62 /* Appointments */ = {
+			isa = PBXGroup;
+			children = (
+				96052DC4113B0762EEF8B638 /* AppointmentListView.swift */,
+				05F1A746D7FBCB7ED575AABE /* RequestAppointmentView.swift */,
+			);
+			path = Appointments;
 			sourceTree = "<group>";
 		};
 		C8ADBE4D0F2DAA595023DF87 /* App */ = {
@@ -385,14 +425,19 @@
 			files = (
 				E1193A908F2B2543A73C52E0 /* AIChatView.swift in Sources */,
 				3FC1E44CBEFB7AFE01054073 /* AmbientBackground.swift in Sources */,
+				637B9AF29CA58B10242C1A8D /* AppointmentListView.swift in Sources */,
 				8B9CFD5AE6EFB94BD7113F80 /* AuthRootView.swift in Sources */,
 				6E5CC8E43333F401D5EFC737 /* BreathingSessionView.swift in Sources */,
 				919F9CE6AFAA9E43BF57F1EA /* BubblePopView.swift in Sources */,
 				A586460F7DE0145D2F680955 /* ChatView.swift in Sources */,
+				9CCFA1C8D5C362BECEEEC540 /* CircleChatView.swift in Sources */,
+				33E772C9BBA57C85FE586E8A /* CircleListView.swift in Sources */,
 				BE785E00D0EE9739E7D27E18 /* CloudFunctionAIChatService.swift in Sources */,
 				39E06395DB9E28248B6EE8DD /* CrisisResourceBanner.swift in Sources */,
 				A52D7E31071B4678B8E06E8D /* CrisisSheet.swift in Sources */,
 				30F0B56750EA6ADD18675788 /* FirebaseAuthService.swift in Sources */,
+				A0D3D3EC7B53CA5168911550 /* FirestoreAppointmentService.swift in Sources */,
+				4EB8E7FE33B81F4B1571FF59 /* FirestoreCircleService.swift in Sources */,
 				BF54DF14EDF0B427E48FF130 /* FirestoreJournalService.swift in Sources */,
 				4DA8A24EE639C84E9376F429 /* FirestoreMessagingService.swift in Sources */,
 				78B42E2688B30A75A2895032 /* FirestoreMoodService.swift in Sources */,
@@ -404,9 +449,12 @@
 				BD8B3C5B05356816754053A9 /* GroundingScriptView.swift in Sources */,
 				750A6EBF2DA3ABBFCB3A5E23 /* MoodCheckInCard.swift in Sources */,
 				5CA71F2EA360102E8F16CA2B /* MoodHistoryChart.swift in Sources */,
+				9667CCA2E4B0B31066E5E241 /* NotificationScheduler.swift in Sources */,
 				FDB340C5CCCAB3CE23E67EA0 /* OnboardingView.swift in Sources */,
 				B00073D0E2DD1469F8011CA1 /* ProfileView.swift in Sources */,
 				9F5E479F8069B2365689D098 /* QuickActionsGrid.swift in Sources */,
+				916E1E1ACD9A2E71FF9346D5 /* ReminderSettingsSection.swift in Sources */,
+				3E66D84C422C1CC394B65CF3 /* RequestAppointmentView.swift in Sources */,
 				B97F4F64EE31C3FA160815FA /* ResourceDetailView.swift in Sources */,
 				3871DEE5B59642B44C76374E /* RootTabView.swift in Sources */,
 				E68EE097F42E6C1B84D43F66 /* SignInView.swift in Sources */,

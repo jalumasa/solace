@@ -87,5 +87,54 @@ service cloud.firestore {
       allow read: if isSignedIn();
       allow write: if false;
     }
+
+    match /appointments/{appointmentId} {
+      function isAppointmentParticipant() {
+        return isSignedIn() && request.auth.uid in resource.data.participantIDs;
+      }
+
+      allow read: if isAppointmentParticipant();
+
+      allow create: if isSignedIn()
+        && request.auth.uid in request.resource.data.participantIDs
+        && request.resource.data.participantIDs.size() == 2
+        && request.resource.data.status == 'pending';
+
+      allow update: if isAppointmentParticipant()
+        // Only status may change after creation.
+        && request.resource.data.studentID == resource.data.studentID
+        && request.resource.data.counselorID == resource.data.counselorID
+        && request.resource.data.participantIDs == resource.data.participantIDs
+        && request.resource.data.scheduledAt == resource.data.scheduledAt;
+
+      allow delete: if false;
+    }
+
+    match /circles/{circleId} {
+      // Curated topic circles — public-read/browse, seeded via the
+      // console/Admin SDK. Members may only ever change the memberIDs field
+      // (joining/leaving), never rename or re-describe the circle.
+      allow read: if isSignedIn();
+
+      allow update: if isSignedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['memberIDs']);
+
+      allow create, delete: if false;
+
+      match /messages/{messageId} {
+        function isCircleMember() {
+          return isSignedIn()
+            && request.auth.uid in
+              get(/databases/$(database)/documents/circles/$(circleId)).data.memberIDs;
+        }
+
+        allow read: if isCircleMember();
+
+        allow create: if isCircleMember()
+          && request.resource.data.senderID == request.auth.uid;
+
+        allow update, delete: if false;
+      }
+    }
   }
 }

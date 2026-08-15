@@ -6,26 +6,38 @@ import Observation
 public final class TodayViewModel {
     public let currentUser: User
     public private(set) var moodHistory: [MoodEntry] = []
+    public private(set) var gratitudeEntries: [GratitudeEntry] = []
     public private(set) var isSubmittingMood = false
     public private(set) var errorMessage: String?
 
     private let moodService: MoodServicing
+    private let journalService: JournalServicing
     @ObservationIgnored
-    private nonisolated(unsafe) var observationTask: Task<Void, Never>?
+    private nonisolated(unsafe) var moodObservationTask: Task<Void, Never>?
+    @ObservationIgnored
+    private nonisolated(unsafe) var journalObservationTask: Task<Void, Never>?
 
-    public init(currentUser: User, moodService: MoodServicing) {
+    public init(currentUser: User, moodService: MoodServicing, journalService: JournalServicing) {
         self.currentUser = currentUser
         self.moodService = moodService
-        observationTask = Task { [weak self] in
+        self.journalService = journalService
+        moodObservationTask = Task { [weak self] in
             guard let self else { return }
             for await history in moodService.observeMoodHistory(for: currentUser.id) {
                 self.moodHistory = history
             }
         }
+        journalObservationTask = Task { [weak self] in
+            guard let self else { return }
+            for await entries in journalService.observeGratitudeEntries(for: currentUser.id) {
+                self.gratitudeEntries = entries
+            }
+        }
     }
 
     deinit {
-        observationTask?.cancel()
+        moodObservationTask?.cancel()
+        journalObservationTask?.cancel()
     }
 
     public var greeting: String {
@@ -46,10 +58,11 @@ public final class TodayViewModel {
 
     /// Consecutive calendar days (ending today or yesterday — a missed today
     /// doesn't zero out yesterday's progress until tomorrow) with at least
-    /// one mood entry.
+    /// one mood check-in or journal entry.
     public var streak: Int {
         let calendar = Calendar.current
-        let days = Set(moodHistory.map { calendar.startOfDay(for: $0.createdAt) })
+        var days = Set(moodHistory.map { calendar.startOfDay(for: $0.createdAt) })
+        days.formUnion(gratitudeEntries.map { calendar.startOfDay(for: $0.createdAt) })
         guard !days.isEmpty else { return 0 }
 
         var cursor = calendar.startOfDay(for: Date())

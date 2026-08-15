@@ -38,6 +38,19 @@ struct TalkView: View {
                     }
                 }
 
+                Section("Connect") {
+                    NavigationLink {
+                        AppointmentListView(currentUser: currentUser)
+                    } label: {
+                        ConnectRow(title: "Appointments", subtitle: "Schedule time with a counselor", systemImage: "calendar", tint: Theme.sky)
+                    }
+                    NavigationLink {
+                        CircleListView(currentUser: currentUser)
+                    } label: {
+                        ConnectRow(title: "Support Circles", subtitle: "Join a peer group on a shared topic", systemImage: "person.3.fill", tint: Theme.leaf)
+                    }
+                }
+
                 if currentUser.role == .student {
                     Section("Counselors") {
                         if viewModel.isLoading && viewModel.counselors.isEmpty {
@@ -119,6 +132,27 @@ struct TalkView: View {
         } else if let started = await viewModel.startConversation(with: counselor) {
             activeConversation = started
         }
+    }
+}
+
+private struct ConnectRow: View {
+    let title: String
+    let subtitle: String
+    let systemImage: String
+    let tint: Color
+
+    var body: some View {
+        HStack(spacing: Theme.Spacing.small) {
+            Image(systemName: systemImage)
+                .font(.title2)
+                .foregroundStyle(tint)
+                .frame(width: 32)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.headline)
+                Text(subtitle).font(.caption).foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 4)
     }
 }
 

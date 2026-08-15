@@ -11,7 +11,7 @@ struct StreakCard: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(streak)-day streak")
                     .font(.headline)
-                Text("Keep checking in to grow it.")
+                Text("Keep journaling to grow it.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

@@ -10,7 +10,8 @@ struct WellnessView: View {
         self.currentUser = currentUser
         _moodViewModel = State(initialValue: TodayViewModel(
             currentUser: currentUser,
-            moodService: FirestoreMoodService()
+            moodService: FirestoreMoodService(),
+            journalService: FirestoreJournalService()
         ))
     }
 

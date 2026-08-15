@@ -11,7 +11,8 @@ struct ProfileView: View {
         self.authViewModel = authViewModel
         _moodViewModel = State(initialValue: TodayViewModel(
             currentUser: currentUser,
-            moodService: FirestoreMoodService()
+            moodService: FirestoreMoodService(),
+            journalService: FirestoreJournalService()
         ))
     }
 
@@ -52,6 +53,8 @@ struct ProfileView: View {
                     LabeledContent("Current streak", value: "\(moodViewModel.streak) day\(moodViewModel.streak == 1 ? "" : "s")")
                     LabeledContent("Check-ins logged", value: "\(moodViewModel.moodHistory.count)")
                 }
+
+                ReminderSettingsSection()
 
                 Section("Crisis Support") {
                     CrisisResourceBanner()

@@ -11,7 +11,8 @@ struct TodayView: View {
         self._selectedTab = selectedTab
         _viewModel = State(initialValue: TodayViewModel(
             currentUser: currentUser,
-            moodService: FirestoreMoodService()
+            moodService: FirestoreMoodService(),
+            journalService: FirestoreJournalService()
         ))
     }
 

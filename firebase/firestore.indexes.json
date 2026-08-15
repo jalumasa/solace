@@ -15,6 +15,14 @@
         { "fieldPath": "participantIDs", "arrayConfig": "CONTAINS" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "appointments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "participantIDs", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "scheduledAt", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

@@ -24,13 +24,16 @@ final class FirestoreMessagingService: MessagingServicing, @unchecked Sendable {
         counselorID: String,
         counselorName: String
     ) async throws -> Conversation {
+        // Filtered by participantIDs (not studentID/counselorID) so the query
+        // shape matches what the security rule can prove safe — a compound
+        // equality filter on studentID/counselorID can't be verified against
+        // an `auth.uid in participantIDs` rule and gets rejected outright.
         let existing = try await firestore.collection("conversations")
-            .whereField("studentID", isEqualTo: studentID)
-            .whereField("counselorID", isEqualTo: counselorID)
-            .limit(to: 1)
+            .whereField("participantIDs", arrayContains: studentID)
             .getDocuments()
 
-        if let document = existing.documents.first, let conversation = Self.conversation(from: document) {
+        if let document = existing.documents.first(where: { ($0.data()["counselorID"] as? String) == counselorID }),
+           let conversation = Self.conversation(from: document) {
             return conversation
         }
 
