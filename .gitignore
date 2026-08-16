@@ -18,9 +18,21 @@ Package.resolved
 # CocoaPods (unused, but ignore if introduced later)
 Pods/
 
+# Android / Gradle
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+*.apk
+*.aab
+captures/
+
 # Secrets — never commit
 GoogleService-Info.plist
 **/GoogleService-Info.plist
+google-services.json
+**/google-services.json
 .env
 .env.*
 *.pem
