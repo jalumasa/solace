@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Solace leaf mark, carried over from the iOS app's identity. Kept well
+     inside the 72x72dp adaptive-icon safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,72 C36,50 49,35 74,34 C75,58 61,72 36,72 Z" />
+
+    <path
+        android:strokeColor="#00A0A0"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M40,68 L70,38" />
+</vector>

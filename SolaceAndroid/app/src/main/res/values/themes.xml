@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose owns the real theming (see ui/theme/Theme.kt); this exists so
+         the activity has a sane splash/window background before Compose runs. -->
+    <style name="Theme.Solace" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
