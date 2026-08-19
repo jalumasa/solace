@@ -33,11 +33,27 @@ SolaceApp/        SwiftUI views + Firebase-backed service implementations
     Games/        Bubble Pop, Gratitude Garden, Focus Rings
     Profile/      Account, streak stats, crisis resources, sign-out
     Shared/       Theme, AmbientBackground, GlassCard, CrisisSheet
+SolaceAndroid/    Kotlin/Compose Android client (foundation — see its README),
+                  sharing this same Firebase backend
 firebase/         Firestore security rules/indexes + the chatWithAI
-                  Cloud Function
+                  Cloud Function — shared by both clients
 project.yml       XcodeGen spec — Solace.xcodeproj is generated from this
                   (run `xcodegen generate` after changing it)
 ```
+
+## Platforms
+
+The iOS app is the complete, shipping client. An Android client lives in
+[`SolaceAndroid/`](SolaceAndroid/README.md) and talks to the *same* Firebase
+project — same Auth, same Firestore documents, same Cloud Function — so a
+student on Android and a counselor on iOS can message each other. SwiftUI and
+Swift don't run on Android, so it's a parallel native client rather than a
+port; the architecture (protocol-first services, MVVM, mock-based tests) is
+mirrored deliberately so the two read as one project.
+
+Because `firebase/firestore.rules` governs both clients, it lives here rather
+than in either client's directory — a rules change and both clients'
+adaptations belong in one diff.
 
 ## Features
 
