@@ -184,8 +184,11 @@ private fun QuickAction(
     Button(
         onClick = onClick,
         modifier = modifier,
+        // A translucent surface rather than a tinted one: over the ambient
+        // background a 15%-alpha tint just reads as mud, so the icon carries
+        // the colour and the plate stays neutral.
         colors = ButtonDefaults.buttonColors(
-            containerColor = tint.copy(alpha = 0.15f),
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.62f),
             contentColor = MaterialTheme.colorScheme.onSurface
         ),
         contentPadding = androidx.compose.foundation.layout.PaddingValues(Spacing.medium)

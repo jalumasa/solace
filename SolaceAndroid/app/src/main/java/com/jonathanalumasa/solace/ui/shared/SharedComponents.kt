@@ -33,8 +33,10 @@ fun ScreenTitle(text: String, modifier: Modifier = Modifier) {
 }
 
 /**
- * The Android counterpart of the iOS `.glassCard()` modifier — Liquid Glass is
- * iOS-only, so this is a Material 3 elevated surface at the same radius.
+ * The Android counterpart of the iOS `.glassCard()` modifier. Liquid Glass is
+ * iOS-only, so this is a Material 3 surface at the same radius — kept
+ * translucent so the tab's [AmbientBackground] tints through it, which is what
+ * gives the two clients a shared feel without imitating glass outright.
  */
 @Composable
 fun SolaceCard(
@@ -45,7 +47,7 @@ fun SolaceCard(
         modifier = modifier.fillMaxWidth(),
         shape = androidx.compose.foundation.shape.RoundedCornerShape(Radius.card),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.70f)
         )
     ) {
         Column(Modifier.padding(Spacing.medium)) { content() }

@@ -69,14 +69,25 @@ fun SolaceTheme(
 }
 
 /**
- * Per-tab ambient gradient palettes, mirroring iOS `Theme.Ambient`. The iOS app
- * animates these as a mesh gradient behind Liquid Glass; here they're used as
- * gentle static backdrops behind Material surfaces.
+ * Per-tab ambient gradient palettes, mirroring iOS `Theme.Ambient` — each tab
+ * gets its own gentle identity rather than one flat background. iOS renders
+ * these as an animated mesh gradient; see `AmbientBackground` for how Compose
+ * approximates that with drifting radial gradients.
  */
 object Ambient {
-    val today: List<Color> = listOf(SolaceColors.Sun, SolaceColors.Coral, SolaceColors.Warm)
-    val talk: List<Color> = listOf(SolaceColors.Sky, SolaceColors.Primary, SolaceColors.Secondary)
-    val wellness: List<Color> = listOf(SolaceColors.Leaf, SolaceColors.Primary, SolaceColors.Sky)
-    val games: List<Color> = listOf(SolaceColors.Secondary, SolaceColors.Coral, SolaceColors.Sun)
-    val profile: List<Color> = listOf(SolaceColors.Primary, SolaceColors.Secondary, SolaceColors.Sky)
+    val today: List<Color> = listOf(
+        SolaceColors.Sun, SolaceColors.Coral, SolaceColors.Warm, SolaceColors.Secondary
+    )
+    val talk: List<Color> = listOf(
+        SolaceColors.Sky, SolaceColors.Primary, SolaceColors.Secondary, SolaceColors.Sky
+    )
+    val wellness: List<Color> = listOf(
+        SolaceColors.Leaf, SolaceColors.Primary, SolaceColors.Sky, SolaceColors.Leaf
+    )
+    val games: List<Color> = listOf(
+        SolaceColors.Secondary, SolaceColors.Coral, SolaceColors.Sun, SolaceColors.Leaf
+    )
+    val profile: List<Color> = listOf(
+        SolaceColors.Primary, SolaceColors.Secondary, SolaceColors.Sky, SolaceColors.Leaf
+    )
 }

@@ -1,7 +1,10 @@
 package com.jonathanalumasa.solace.ui
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,12 +27,14 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jonathanalumasa.solace.ServiceLocator
@@ -43,6 +48,7 @@ import com.jonathanalumasa.solace.ui.connect.CirclesScreen
 import com.jonathanalumasa.solace.ui.games.GameScreen
 import com.jonathanalumasa.solace.ui.games.GamesScreen
 import com.jonathanalumasa.solace.ui.games.SolaceGame
+import com.jonathanalumasa.solace.ui.shared.AmbientBackground
 import com.jonathanalumasa.solace.ui.shared.CrisisResourceList
 import com.jonathanalumasa.solace.ui.shared.CrisisSheet
 import com.jonathanalumasa.solace.ui.shared.ScreenTitle
@@ -53,6 +59,7 @@ import com.jonathanalumasa.solace.ui.talk.Bubble
 import com.jonathanalumasa.solace.ui.talk.ChatScreen
 import com.jonathanalumasa.solace.ui.talk.MessageThread
 import com.jonathanalumasa.solace.ui.talk.TalkScreen
+import com.jonathanalumasa.solace.ui.theme.Ambient
 import com.jonathanalumasa.solace.ui.theme.Spacing
 import com.jonathanalumasa.solace.ui.today.TodayScreen
 import com.jonathanalumasa.solace.ui.wellness.RelaxationScreen
@@ -110,36 +117,61 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
 
     BackHandler(enabled = destination != null) { destination = null }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("") },
-                navigationIcon = {
-                    if (destination != null) {
-                        IconButton(onClick = { destination = null }) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+    // Each tab carries its own ambient palette, mirroring iOS. The gradient
+    // cross-fades on tab change rather than cutting, so switching tabs feels
+    // like moving through one space instead of swapping screens.
+    val palette = when (selectedTab) {
+        AppTab.TODAY -> Ambient.today
+        AppTab.TALK -> Ambient.talk
+        AppTab.WELLNESS -> Ambient.wellness
+        AppTab.GAMES -> Ambient.games
+        AppTab.PROFILE -> Ambient.profile
+    }
+
+    Box(Modifier.fillMaxSize()) {
+        Crossfade(targetState = palette, animationSpec = tween(600), label = "ambient-tab") {
+            AmbientBackground(colors = it)
+        }
+
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                TopAppBar(
+                    title = { Text("") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color.Transparent
+                    ),
+                    navigationIcon = {
+                        if (destination != null) {
+                            IconButton(onClick = { destination = null }) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "Back"
+                                )
+                            }
                         }
+                    },
+                    actions = { SosButton { showCrisis = true } }
+                )
+            },
+            bottomBar = {
+                NavigationBar(
+                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.75f)
+                ) {
+                    AppTab.entries.forEach { tab ->
+                        NavigationBarItem(
+                            selected = selectedTab == tab,
+                            onClick = {
+                                selectedTab = tab
+                                destination = null
+                            },
+                            icon = { Icon(tab.icon, contentDescription = tab.label) },
+                            label = { Text(tab.label) }
+                        )
                     }
-                },
-                actions = { SosButton { showCrisis = true } }
-            )
-        },
-        bottomBar = {
-            NavigationBar {
-                AppTab.entries.forEach { tab ->
-                    NavigationBarItem(
-                        selected = selectedTab == tab,
-                        onClick = {
-                            selectedTab = tab
-                            destination = null
-                        },
-                        icon = { Icon(tab.icon, contentDescription = tab.label) },
-                        label = { Text(tab.label) }
-                    )
                 }
             }
-        }
-    ) { padding ->
+        ) { padding ->
         // Chat destinations own a LazyColumn, so they must NOT sit inside a
         // verticalScroll — nesting two vertical scrollers crashes Compose.
         // Everything else opts into scrolling via [Scrollable].
@@ -223,6 +255,7 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
 
                 is Destination.Relaxation -> Scrollable { RelaxationScreen(current.exercise) }
                 is Destination.Game -> Scrollable { GameScreen(current.game, todayViewModel) }
+            }
             }
         }
     }
