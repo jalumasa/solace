@@ -40,6 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jonathanalumasa.solace.ServiceLocator
 import com.jonathanalumasa.solace.model.Conversation
 import com.jonathanalumasa.solace.model.RelaxationExercise
+import com.jonathanalumasa.solace.model.ResourceItem
 import com.jonathanalumasa.solace.model.Role
 import com.jonathanalumasa.solace.model.SupportCircle
 import com.jonathanalumasa.solace.model.User
@@ -62,6 +63,7 @@ import com.jonathanalumasa.solace.ui.talk.TalkScreen
 import com.jonathanalumasa.solace.ui.theme.Ambient
 import com.jonathanalumasa.solace.ui.theme.Spacing
 import com.jonathanalumasa.solace.ui.today.TodayScreen
+import com.jonathanalumasa.solace.ui.wellness.ArticleScreen
 import com.jonathanalumasa.solace.ui.wellness.RelaxationScreen
 import com.jonathanalumasa.solace.ui.wellness.WellnessScreen
 import com.jonathanalumasa.solace.viewModelFactory
@@ -71,6 +73,7 @@ import com.jonathanalumasa.solace.viewmodel.ChatViewModel
 import com.jonathanalumasa.solace.viewmodel.CircleChatViewModel
 import com.jonathanalumasa.solace.viewmodel.CircleListViewModel
 import com.jonathanalumasa.solace.viewmodel.ConversationListViewModel
+import com.jonathanalumasa.solace.viewmodel.ResourceLibraryViewModel
 import com.jonathanalumasa.solace.viewmodel.TodayViewModel
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -92,6 +95,7 @@ private sealed interface Destination {
     data class Chat(val conversation: Conversation) : Destination
     data class CircleChat(val circle: SupportCircle) : Destination
     data class Relaxation(val exercise: RelaxationExercise) : Destination
+    data class Article(val article: ResourceItem) : Destination
     data class Game(val game: SolaceGame) : Destination
 }
 
@@ -107,6 +111,10 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
         factory = viewModelFactory {
             TodayViewModel(currentUser, ServiceLocator.moodService, ServiceLocator.journalService)
         }
+    )
+    val resourceViewModel: ResourceLibraryViewModel = viewModel(
+        key = "resources",
+        factory = viewModelFactory { ResourceLibraryViewModel(ServiceLocator.resourceService) }
     )
     val conversationViewModel: ConversationListViewModel = viewModel(
         key = "conversations-${currentUser.id}",
@@ -188,6 +196,7 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
                         currentUser = currentUser,
                         todayViewModel = todayViewModel,
                         conversationViewModel = conversationViewModel,
+                        resourceViewModel = resourceViewModel,
                         onSelectTab = { selectedTab = it },
                         onNavigate = { destination = it },
                         onSignOut = onSignOut
@@ -254,6 +263,7 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
                 }
 
                 is Destination.Relaxation -> Scrollable { RelaxationScreen(current.exercise) }
+                is Destination.Article -> Scrollable { ArticleScreen(current.article) }
                 is Destination.Game -> Scrollable { GameScreen(current.game, todayViewModel) }
             }
             }
@@ -301,6 +311,7 @@ private fun TabContent(
     currentUser: User,
     todayViewModel: TodayViewModel,
     conversationViewModel: ConversationListViewModel,
+    resourceViewModel: ResourceLibraryViewModel,
     onSelectTab: (AppTab) -> Unit,
     onNavigate: (Destination) -> Unit,
     onSignOut: () -> Unit
@@ -325,7 +336,9 @@ private fun TabContent(
 
         AppTab.WELLNESS -> WellnessScreen(
             todayViewModel = todayViewModel,
-            onOpenExercise = { onNavigate(Destination.Relaxation(it)) }
+            resourceViewModel = resourceViewModel,
+            onOpenExercise = { onNavigate(Destination.Relaxation(it)) },
+            onOpenArticle = { onNavigate(Destination.Article(it)) }
         )
 
         AppTab.GAMES -> GamesScreen(onOpenGame = { onNavigate(Destination.Game(it)) })

@@ -31,12 +31,15 @@ on an emulator.
 | Talk: AI companion, counselors, 1:1 chat, conversations | Verified |
 | Appointments: request / confirm / decline / cancel | Built, list verified |
 | Support Circles: browse, join/leave, group chat | Verified |
-| Wellness: mood chart, relaxation exercises | Verified |
+| Wellness: mood chart, relaxation exercises, articles | Verified |
 | Games: all five | Verified (Bubble Pop played) |
 | Profile: details, progress, crisis, sign-out | Verified |
 | Daily check-in reminders (WorkManager) | Not started |
 | Onboarding carousel | Not started |
 | Gratitude Garden *writes* (read-only today) | Not started |
+
+The `resources` collection is unseeded, so Articles renders its empty state —
+same as iOS. Seed a few documents in the Firebase console to populate it.
 
 **Cross-platform interop is real, not theoretical.** Signing in on Android with
 an account created on iOS loads the same profile, the same three counselors with

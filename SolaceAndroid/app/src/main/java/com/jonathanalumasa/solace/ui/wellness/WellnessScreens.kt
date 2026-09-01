@@ -7,12 +7,16 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,20 +38,29 @@ import com.jonathanalumasa.solace.model.BreathingPattern
 import com.jonathanalumasa.solace.model.MoodEntry
 import com.jonathanalumasa.solace.model.RelaxationExercise
 import com.jonathanalumasa.solace.model.RelaxationKind
+import com.jonathanalumasa.solace.model.ResourceCategory
+import com.jonathanalumasa.solace.model.ResourceItem
 import com.jonathanalumasa.solace.ui.shared.ScreenTitle
 import com.jonathanalumasa.solace.ui.shared.SolaceCard
 import com.jonathanalumasa.solace.ui.theme.SolaceColors
 import com.jonathanalumasa.solace.ui.theme.Spacing
 import com.jonathanalumasa.solace.ui.theme.color
+import com.jonathanalumasa.solace.viewmodel.ResourceLibraryViewModel
 import com.jonathanalumasa.solace.viewmodel.TodayViewModel
 import kotlinx.coroutines.delay
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WellnessScreen(
     todayViewModel: TodayViewModel,
-    onOpenExercise: (RelaxationExercise) -> Unit
+    resourceViewModel: ResourceLibraryViewModel,
+    onOpenExercise: (RelaxationExercise) -> Unit,
+    onOpenArticle: (ResourceItem) -> Unit
 ) {
     val moodHistory by todayViewModel.moodHistory.collectAsStateWithLifecycle()
+    val resources by resourceViewModel.resources.collectAsStateWithLifecycle()
+    val selectedCategory by resourceViewModel.selectedCategory.collectAsStateWithLifecycle()
+    val isLoading by resourceViewModel.isLoading.collectAsStateWithLifecycle()
 
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.large)) {
         ScreenTitle("Wellness")
@@ -75,6 +88,77 @@ fun WellnessScreen(
                 }
                 if (index != RelaxationExercise.all.lastIndex) HorizontalDivider()
             }
+        }
+
+        Text("Articles", style = MaterialTheme.typography.titleSmall)
+
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(Spacing.small)) {
+            FilterChip(
+                selected = selectedCategory == null,
+                onClick = { resourceViewModel.selectCategory(null) },
+                label = { Text("All") }
+            )
+            ResourceCategory.entries.forEach { category ->
+                FilterChip(
+                    selected = selectedCategory == category,
+                    onClick = { resourceViewModel.selectCategory(category) },
+                    label = { Text(category.displayName) }
+                )
+            }
+        }
+
+        val visible = resourceViewModel.filtered(resources, selectedCategory)
+        when {
+            isLoading && resources.isEmpty() -> CircularProgressIndicator()
+
+            visible.isEmpty() -> Text(
+                if (resources.isEmpty())
+                    "No articles yet — they're seeded into Firestore, so this fills in " +
+                        "once content is added."
+                else "Nothing in this category yet.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            else -> SolaceCard {
+                visible.forEachIndexed { index, article ->
+                    Column(
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable { onOpenArticle(article) }
+                            .padding(vertical = Spacing.small)
+                    ) {
+                        Text(article.title, style = MaterialTheme.typography.titleMedium)
+                        Text(
+                            article.summary,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 2
+                        )
+                    }
+                    if (index != visible.lastIndex) HorizontalDivider()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ArticleScreen(article: ResourceItem) {
+    Column(verticalArrangement = Arrangement.spacedBy(Spacing.medium)) {
+        ScreenTitle(article.title)
+        Text(
+            article.category.displayName,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            article.summary,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        SolaceCard {
+            Text(article.body, style = MaterialTheme.typography.bodyMedium)
         }
     }
 }

@@ -9,6 +9,7 @@ import com.jonathanalumasa.solace.service.CircleService
 import com.jonathanalumasa.solace.service.JournalService
 import com.jonathanalumasa.solace.service.MessagingService
 import com.jonathanalumasa.solace.service.MoodService
+import com.jonathanalumasa.solace.service.ResourceService
 import com.jonathanalumasa.solace.service.firebase.CloudFunctionAIChatService
 import com.jonathanalumasa.solace.service.firebase.FirebaseAuthService
 import com.jonathanalumasa.solace.service.firebase.FirestoreAppointmentService
@@ -16,6 +17,7 @@ import com.jonathanalumasa.solace.service.firebase.FirestoreCircleService
 import com.jonathanalumasa.solace.service.firebase.FirestoreJournalService
 import com.jonathanalumasa.solace.service.firebase.FirestoreMessagingService
 import com.jonathanalumasa.solace.service.firebase.FirestoreMoodService
+import com.jonathanalumasa.solace.service.firebase.FirestoreResourceService
 
 /**
  * Plain constructor injection, no DI framework — mirroring the iOS app, where
@@ -29,6 +31,7 @@ object ServiceLocator {
     val journalService: JournalService by lazy { FirestoreJournalService() }
     val appointmentService: AppointmentService by lazy { FirestoreAppointmentService() }
     val circleService: CircleService by lazy { FirestoreCircleService() }
+    val resourceService: ResourceService by lazy { FirestoreResourceService() }
     val aiChatService: AIChatService by lazy { CloudFunctionAIChatService() }
 }
 
