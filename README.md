@@ -44,22 +44,34 @@ project.yml       XcodeGen spec — Solace.xcodeproj is generated from this
 - Email/password auth with two roles: student and counselor (counselors add
   a short bio students see in the directory)
 - **Today**: a one-tap daily mood check-in (Firestore-backed, 5-point scale)
-  that drives a visible streak, plus quick actions into the other tabs
-- **Talk**: the AI companion is pinned at the top of one unified tab, with
-  counselor conversations below — real-time 1:1 messaging gated by
-  Firestore rules so only conversation participants can read or write
+  driving a streak that counts any day with a check-in *or* a journal entry,
+  plus quick actions into the other tabs
+- **Talk**: one "ways to reach out" hub — the AI companion pinned at the top,
+  a Connect section for appointments and support circles, then counselor
+  conversations. Real-time 1:1 messaging gated by Firestore rules so only
+  conversation participants can read or write
+- **Appointments**: students request a time with a counselor; counselors
+  confirm or decline, and either side can cancel
+- **Support circles**: pre-seeded topic groups (exam stress, homesickness,
+  sleep and burnout, first-gen students) that anyone can join, leave, and
+  post in — group chat on top of a members-only Firestore rule
 - **Wellness**: a mood-history chart (Swift Charts) over the resource
   library — articles (editorial content, seeded via Firestore) and
   self-contained relaxation exercises (animated box/4-7-8 breathing timer,
-  5-4-3-2-1 grounding script), all fully functional offline since they ship
-  no external audio/video assets
-- **Games**: three calm, no-fail activities — no scores, no timers under
+  5-4-3-2-1 grounding, body scan, three good things), all fully functional
+  offline since they ship no external audio/video assets
+- **Reminders**: an opt-in daily check-in notification at a time you pick.
+  Local (`UNUserNotificationCenter`) rather than remote push — there's no
+  server to trigger from, and on a single device the two are equivalent
+- **Games**: five calm, no-fail activities — no scores, no timers under
   pressure, no leaderboards, deliberately not competitive:
   - *Bubble Pop* — a satisfying tap-to-pop bubble grid
   - *Gratitude Garden* — logging gratitude entries (Firestore-backed) grows
     a garden through visual stages
   - *Focus Rings* — tap the ring when it blooms; missing isn't a failure,
     it just tries again
+  - *Zen Garden* — rake patterns into sand; nothing to get wrong
+  - *Worry Jar* — write down a worry, then watch it drift away
 - Crisis resources (988 Suicide & Crisis Lifeline, Crisis Text Line) are one
   tap away everywhere via a persistent SOS toolbar button, on top of the
   existing inline placements — the AI companion is for general support only
@@ -67,7 +79,7 @@ project.yml       XcodeGen spec — Solace.xcodeproj is generated from this
 
 ## Status
 
-- ✅ `SolaceCore` builds and its full test suite passes (48 tests, `swift
+- ✅ `SolaceCore` builds and its full test suite passes (74 tests, `swift
   test` from `SolaceCore/`)
 - ✅ The `chatWithAI` Cloud Function typechecks and compiles
 - ✅ Firestore rules and indexes are written and deployed
@@ -77,8 +89,9 @@ project.yml       XcodeGen spec — Solace.xcodeproj is generated from this
   'platform=iOS Simulator,name=iPhone 17 Pro' build`)
 - ✅ Verified live against a real Firebase project: mood check-in →
   Firestore write → streak/chart update, sign-up for both roles, Talk tab's
-  merged AI/counselor flow, Bubble Pop interaction, all five tabs' Liquid
-  Glass + ambient-background styling
+  merged AI/counselor flow, requesting an appointment, joining a support
+  circle, Bubble Pop interaction, all five tabs' Liquid Glass +
+  ambient-background styling
 - ⏳ Deploying `chatWithAI` needs the Firebase project on the Blaze plan
   (see [SETUP.md](SETUP.md)) — until then the AI companion shows a graceful
   "unavailable" error instead of crashing
