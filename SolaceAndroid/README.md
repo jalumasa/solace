@@ -34,9 +34,9 @@ on an emulator.
 | Wellness: mood chart, relaxation exercises, articles | Verified |
 | Games: all five | Verified (Bubble Pop played) |
 | Profile: details, progress, crisis, sign-out | Verified |
-| Daily check-in reminders (WorkManager) | Not started |
-| Onboarding carousel | Not started |
-| Gratitude Garden *writes* (read-only today) | Not started |
+| Daily check-in reminders (WorkManager) | Built, not yet verified on device |
+| Onboarding carousel | Verified |
+| Gratitude Garden writes | Built, not yet verified on device |
 
 The `resources` collection is unseeded, so Articles renders its empty state —
 same as iOS. Seed a few documents in the Firebase console to populate it.

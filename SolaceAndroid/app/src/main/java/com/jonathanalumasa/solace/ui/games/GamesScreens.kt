@@ -52,7 +52,7 @@ import com.jonathanalumasa.solace.ui.shared.ScreenTitle
 import com.jonathanalumasa.solace.ui.shared.SolaceCard
 import com.jonathanalumasa.solace.ui.theme.SolaceColors
 import com.jonathanalumasa.solace.ui.theme.Spacing
-import com.jonathanalumasa.solace.viewmodel.TodayViewModel
+import com.jonathanalumasa.solace.viewmodel.GratitudeGardenViewModel
 import kotlinx.coroutines.delay
 
 enum class SolaceGame(val title: String, val subtitle: String) {
@@ -102,12 +102,12 @@ fun GamesScreen(onOpenGame: (SolaceGame) -> Unit) {
 }
 
 @Composable
-fun GameScreen(game: SolaceGame, todayViewModel: TodayViewModel) {
+fun GameScreen(game: SolaceGame, gratitudeViewModel: GratitudeGardenViewModel) {
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.large)) {
         ScreenTitle(game.title)
         when (game) {
             SolaceGame.BUBBLE_POP -> BubblePop()
-            SolaceGame.GRATITUDE_GARDEN -> GratitudeGarden(todayViewModel)
+            SolaceGame.GRATITUDE_GARDEN -> GratitudeGarden(gratitudeViewModel)
             SolaceGame.FOCUS_RINGS -> FocusRings()
             SolaceGame.ZEN_GARDEN -> ZenGarden()
             SolaceGame.WORRY_JAR -> WorryJar()
@@ -162,9 +162,12 @@ private fun BubblePop() {
 }
 
 @Composable
-private fun GratitudeGarden(todayViewModel: TodayViewModel) {
-    val entries by todayViewModel.gratitudeEntries.collectAsStateWithLifecycle()
-    val stage = GardenStage.forEntryCount(entries.size)
+private fun GratitudeGarden(viewModel: GratitudeGardenViewModel) {
+    val entries by viewModel.entries.collectAsStateWithLifecycle()
+    val draft by viewModel.draftText.collectAsStateWithLifecycle()
+    val isSaving by viewModel.isSaving.collectAsStateWithLifecycle()
+    val error by viewModel.errorMessage.collectAsStateWithLifecycle()
+    val stage = viewModel.stage
 
     Text(
         stage.description,
@@ -188,11 +191,32 @@ private fun GratitudeGarden(todayViewModel: TodayViewModel) {
             )
             Text(stage.label, style = MaterialTheme.typography.titleMedium)
             Text(
-                "${entries.size} entries",
+                "${entries.size} ${if (entries.size == 1) "entry" else "entries"}",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+    }
+
+    OutlinedTextField(
+        value = draft,
+        onValueChange = viewModel::updateDraft,
+        placeholder = { Text("Something you're grateful for…") },
+        enabled = !isSaving,
+        modifier = Modifier.fillMaxWidth(),
+        maxLines = 3
+    )
+
+    error?.let {
+        Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+    }
+
+    Button(
+        onClick = viewModel::addEntry,
+        enabled = draft.isNotBlank() && !isSaving,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(if (isSaving) "Planting…" else "Plant it")
     }
 
     if (entries.isNotEmpty()) {
@@ -203,13 +227,6 @@ private fun GratitudeGarden(todayViewModel: TodayViewModel) {
             }
         }
     }
-
-    Text(
-        "Add entries from the Gratitude Garden on iOS, or use Worry Jar here — " +
-            "journaling writes are coming to this screen next.",
-        style = MaterialTheme.typography.labelSmall,
-        color = MaterialTheme.colorScheme.onSurfaceVariant
-    )
 }
 
 @Composable

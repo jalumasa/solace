@@ -48,6 +48,7 @@ import com.jonathanalumasa.solace.ui.connect.AppointmentsScreen
 import com.jonathanalumasa.solace.ui.connect.CirclesScreen
 import com.jonathanalumasa.solace.ui.games.GameScreen
 import com.jonathanalumasa.solace.ui.games.GamesScreen
+import com.jonathanalumasa.solace.ui.profile.ReminderSettings
 import com.jonathanalumasa.solace.ui.games.SolaceGame
 import com.jonathanalumasa.solace.ui.shared.AmbientBackground
 import com.jonathanalumasa.solace.ui.shared.CrisisResourceList
@@ -73,6 +74,7 @@ import com.jonathanalumasa.solace.viewmodel.ChatViewModel
 import com.jonathanalumasa.solace.viewmodel.CircleChatViewModel
 import com.jonathanalumasa.solace.viewmodel.CircleListViewModel
 import com.jonathanalumasa.solace.viewmodel.ConversationListViewModel
+import com.jonathanalumasa.solace.viewmodel.GratitudeGardenViewModel
 import com.jonathanalumasa.solace.viewmodel.ResourceLibraryViewModel
 import com.jonathanalumasa.solace.viewmodel.TodayViewModel
 import androidx.compose.foundation.layout.ColumnScope
@@ -115,6 +117,12 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
     val resourceViewModel: ResourceLibraryViewModel = viewModel(
         key = "resources",
         factory = viewModelFactory { ResourceLibraryViewModel(ServiceLocator.resourceService) }
+    )
+    val gratitudeViewModel: GratitudeGardenViewModel = viewModel(
+        key = "gratitude-${currentUser.id}",
+        factory = viewModelFactory {
+            GratitudeGardenViewModel(currentUser.id, ServiceLocator.journalService)
+        }
     )
     val conversationViewModel: ConversationListViewModel = viewModel(
         key = "conversations-${currentUser.id}",
@@ -197,6 +205,7 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
                         todayViewModel = todayViewModel,
                         conversationViewModel = conversationViewModel,
                         resourceViewModel = resourceViewModel,
+                        gratitudeViewModel = gratitudeViewModel,
                         onSelectTab = { selectedTab = it },
                         onNavigate = { destination = it },
                         onSignOut = onSignOut
@@ -264,7 +273,7 @@ fun RootScaffold(currentUser: User, onSignOut: () -> Unit) {
 
                 is Destination.Relaxation -> Scrollable { RelaxationScreen(current.exercise) }
                 is Destination.Article -> Scrollable { ArticleScreen(current.article) }
-                is Destination.Game -> Scrollable { GameScreen(current.game, todayViewModel) }
+                is Destination.Game -> Scrollable { GameScreen(current.game, gratitudeViewModel) }
             }
             }
         }
@@ -312,6 +321,7 @@ private fun TabContent(
     todayViewModel: TodayViewModel,
     conversationViewModel: ConversationListViewModel,
     resourceViewModel: ResourceLibraryViewModel,
+    gratitudeViewModel: GratitudeGardenViewModel,
     onSelectTab: (AppTab) -> Unit,
     onNavigate: (Destination) -> Unit,
     onSignOut: () -> Unit
@@ -384,6 +394,8 @@ private fun ProfileTab(
             )
             LabeledRow("Check-ins logged", moodHistory.size.toString())
         }
+
+        ReminderSettings()
 
         Text("Crisis Support", style = MaterialTheme.typography.titleSmall)
         SolaceCard { CrisisResourceList() }
